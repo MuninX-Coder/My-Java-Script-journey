@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban project --- Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <h1>Kanban Board</h1>
+        <div class="container">
+            <div class="todoWrapper">
+                <div class="todoHeading">
+                    <h3>Todo</h3>
+                    <button id="addBtn">Add Task</button>
+                </div>
+                <div class="todoColumn">
+
+                </div>
+            </div>
+
+            <div class="doingWrapper">
+                <div class="doingHeading">
+                    <h3>Doing</h3>
+                </div>
+                <div class="doingColumn">
+
+                </div>
+            </div>
+
+            <div class="doneWrapper">
+                <div class="doneHeading">
+                    <h3>Done</h3>
+                </div>
+                <div class="doneColumn">
+
+                </div>
+            </div>
+        </div>
+
+        <form hidden id="myForm">
+            <div>
+
+                <input type="text" id="taskTitle" placeholder="Task Title">
+            </div>
+            <div>
+
+                <textarea name="desc" id="taskDescription" placeholder="Task Description"></textarea>
+            </div>
+
+            <div class="btns">
+                <button id="createBtn">create</button>
+                <button id="CancelBtn">Cancel</button>
+            </div>
+        </form>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

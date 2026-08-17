@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+                <button id="themeBtn">🌙</button>
+        <h1 id="heading">Kanban Task Manager</h1>
+
+        <div class="container">
+            <!-- Todo Column Block -->
+            <div class="column-wrapper">
+                <div class="column-header">
+                    <h2>Todo</h2>
+                    <button id="addTaskBtn">+ Add Task</button>
+                </div>
+                <div id="todoColumn"></div>
+            </div>
+
+            <!-- Doing Column Block -->
+            <div class="column-wrapper">
+                <div class="column-header">
+                    <h2>Doing</h2>
+                </div>
+                <div id="doingColumn"></div>
+            </div>
+
+            <!-- Done Column Block -->
+            <div class="column-wrapper">
+                <div class="column-header">
+                    <h2>Done</h2>
+                </div>
+                <div id="doneColumn"></div>
+            </div>
+        </div>
+
+        <form id="myForm" hidden>
+            <div>
+                <input type="text" id="title" name="title" placeholder="Enter title" required>
+            </div>
+            <div>
+                <textarea id="description" name="description" rows="5" placeholder="Enter description"
+                    required></textarea>
+            </div>
+            <div>
+                <button type="button" id="createBtn">Create</button>
+                <button type="button" id="cancelBtn">Cancel</button>
+            </div>
+        </form>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

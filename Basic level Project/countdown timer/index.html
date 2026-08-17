@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Google Fonts for premium typography */
+@import url('https://googleapis.com');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0b0f19; /* Deep Cyber Void space */
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Subtle unique mesh background glow */
+    background-image: 
+        radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+        radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%), 
+        radial-gradient(at 100% 0%, hsla(339,49%,30%,0.15) 0, transparent 50%);
+}
+
+main {
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 3rem 2.5rem;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Big Aesthetic Monospace Countdown Display */
+#displayTimer {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    letter-spacing: -2px;
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+    transition: all 0.3s ease;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+/* Dynamic State Styling via JS (Times up / Auto stop) */
+#displayTimer.status-text {
+    font-size: 2.2rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: 0px;
+    font-weight: 600;
+    color: #f43f5e; /* Cyber Coral / Red */
+    text-shadow: 0 0 20px rgba(244, 63, 94, 0.3);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+/* Cyber-minimal Inputs */
+input[type="number"] {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background: rgba(30, 41, 59, 0.5);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: #f8fafc;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input[type="number"]::placeholder {
+    color: #64748b;
+    text-transform: capitalize;
+}
+
+input[type="number"]:focus {
+    border-color: #6366f1; /* Premium Electric Indigo */
+    background: rgba(30, 41, 59, 0.8);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
+}
+
+/* Remove default spin buttons for clean layout */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Neon-Border Shimmer Button */
+#startTimerBtn {
+    width: 100%;
+    padding: 1.1rem;
+    background: #6366f1;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+}
+
+#startTimerBtn:hover {
+    background: #4f46e5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(99, 102, 241, 0.45);
+}
+
+#startTimerBtn:active {
+    transform: translateY(0);
+}
+
+    </style>
+</head>
+<body>
+    <main>
+        <!-- Added a default 00 so UI doesn't look empty on load -->
+        <div id="displayTimer">00</div>
+        
+        <div class="input-group">
+            <input type="number" placeholder="enter your timer" id="timerInp">
+            <input type="number" placeholder="enter auto stop" id="autoStopInp">
+        </div>
+        
+        <button id="startTimerBtn">Start Timer</button>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

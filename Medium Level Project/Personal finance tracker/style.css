@@ -1,0 +1,979 @@
+/* =========================================================
+   PERSONAL FINANCE TRACKER
+   Warm Minimal / Editorial Finance UI
+   ========================================================= */
+
+
+/* =========================================================
+   LIGHT THEME
+   ========================================================= */
+:root {
+  /* =========================================
+     WARM SAND / MUTED EARTH THEME
+     ========================================= */
+
+  /* Page */
+  --bg: #e0c9a2;
+
+  /* Cards / panels */
+  --surface: #eadcc4;
+
+  /* Inputs / secondary surfaces */
+  --surface-soft: #e4d4b8;
+
+  /* Hover surfaces */
+  --surface-hover: #ddc9a7;
+
+
+  /* Main text */
+  --text: #302b24;
+
+  /* Secondary text */
+  --text-secondary: #62584a;
+
+  /* Muted text */
+  --text-muted: #817565;
+
+
+  /* Borders */
+  --border: #cdbb9c;
+
+  /* Stronger borders */
+  --border-strong: #bca886;
+
+
+  /* Main action */
+  --primary: #666653;
+
+  /* Main action hover */
+  --primary-hover: #555543;
+
+
+  /* Income */
+  --income: #526b55;
+
+  /* Expense */
+  --expense: #955d50;
+
+
+  /* Soft income background */
+  --income-soft: #d5dfd1;
+
+  /* Soft expense background */
+  --expense-soft: #e5d1cb;
+
+
+  /* Shadows */
+  --shadow:
+    0 1px 2px rgba(55, 43, 28, 0.05),
+    0 8px 22px rgba(55, 43, 28, 0.08);
+
+  --shadow-hover:
+    0 2px 4px rgba(55, 43, 28, 0.06),
+    0 12px 28px rgba(55, 43, 28, 0.11);
+}
+
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
+body.dark-mode {
+  --bg: #1f1e1b;
+  --surface: #282622;
+  --surface-soft: #24231f;
+  --surface-hover: #302e29;
+
+  --text: #e7e3da;
+  --text-secondary: #aaa59b;
+  --text-muted: #817c72;
+
+  --border: #393630;
+  --border-strong: #48453e;
+
+  --primary: #a5ad99;
+  --primary-hover: #b7bea9;
+
+  --income: #91aa93;
+  --expense: #c4877a;
+
+  --income-soft: #2b342d;
+  --expense-soft: #382c29;
+
+  --shadow:
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    0 10px 28px rgba(0, 0, 0, 0.18);
+
+  --shadow-hover:
+    0 2px 4px rgba(0, 0, 0, 0.24),
+    0 14px 32px rgba(0, 0, 0, 0.22);
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+html {
+  font-size: 16px;
+}
+
+
+body {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at top center,
+      rgba(255, 255, 255, 0.20),
+      transparent 45%
+    ),
+    var(--bg);
+
+  color: var(--text);
+
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  line-height: 1.5;
+
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+
+
+body.dark-mode {
+  background:
+    radial-gradient(
+      circle at top center,
+      rgba(255, 255, 255, 0.025),
+      transparent 45%
+    ),
+    var(--bg);
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+main {
+  width: min(1180px, calc(100% - 40px));
+
+  min-height: 100vh;
+
+  margin: 0 auto;
+
+  padding: 42px 0 60px;
+
+  position: relative;
+}
+
+
+/* =========================================================
+   MAIN HEADING
+   ========================================================= */
+
+main > h1 {
+  width: 100%;
+
+  text-align: center;
+
+  margin-bottom: 34px;
+
+  color: var(--text);
+
+  font-size: clamp(1.8rem, 3vw, 2.35rem);
+
+  font-weight: 650;
+
+  letter-spacing: -0.045em;
+
+  animation: pageTitle 0.65s ease both;
+}
+
+
+/* =========================================================
+   THEME BUTTON
+   ========================================================= */
+
+#themeToggle {
+  position: absolute;
+
+  top: 38px;
+  right: 0;
+
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--surface);
+
+  color: var(--text);
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  box-shadow: var(--shadow);
+
+  transition:
+    transform 0.25s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.25s ease;
+}
+
+
+#themeToggle:hover {
+  transform: translateY(-2px) rotate(4deg);
+
+  background: var(--surface-hover);
+
+  border-color: var(--border-strong);
+
+  box-shadow: var(--shadow-hover);
+}
+
+
+#themeToggle:active {
+  transform: scale(0.94);
+}
+
+
+/* =========================================================
+   MAIN TWO COLUMN LAYOUT
+   IMPORTANT:
+   BOTH PANELS HAVE SAME HEIGHT
+   ========================================================= */
+
+.container {
+  display: grid;
+
+  grid-template-columns: 310px minmax(0, 1fr);
+
+  gap: 22px;
+
+  align-items: stretch;
+
+  animation: containerEnter 0.7s ease 0.08s both;
+}
+
+
+/* =========================================================
+   PANELS
+   ========================================================= */
+
+.addTransactionContainer,
+.dashboardContainer {
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 14px;
+
+  box-shadow: var(--shadow);
+
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+
+.addTransactionContainer:hover,
+.dashboardContainer:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+
+/*
+   This is important.
+
+   The two panels will stretch to the height
+   of whichever panel is taller.
+*/
+
+.addTransactionContainer,
+.dashboardContainer {
+  height: 100%;
+}
+
+
+/* =========================================================
+   LEFT FORM PANEL
+   ========================================================= */
+
+.addTransactionContainer {
+  padding: 24px;
+}
+
+
+form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 17px;
+}
+
+
+form > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+
+/* =========================================================
+   LABELS
+   ========================================================= */
+
+label {
+  color: var(--text-secondary);
+
+  font-size: 0.76rem;
+
+  font-weight: 650;
+
+  letter-spacing: 0.015em;
+}
+
+
+/* =========================================================
+   FORM ELEMENTS
+   ========================================================= */
+
+input,
+select,
+textarea {
+  width: 100%;
+
+  background: var(--surface-soft);
+
+  color: var(--text);
+
+  border: 1px solid var(--border);
+
+  border-radius: 8px;
+
+  padding: 10px 11px;
+
+  outline: none;
+
+  font: inherit;
+
+  font-size: 0.88rem;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+}
+
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--border-strong);
+}
+
+
+input:focus,
+select:focus,
+textarea:focus {
+  background: var(--surface);
+
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 3px rgba(107, 112, 97, 0.10);
+}
+
+
+body.dark-mode input:focus,
+body.dark-mode select:focus,
+body.dark-mode textarea:focus {
+  box-shadow:
+    0 0 0 3px rgba(165, 173, 153, 0.10);
+}
+
+
+textarea {
+  min-height: 92px;
+
+  resize: vertical;
+}
+
+
+/* =========================================================
+   ADD BUTTON
+   ========================================================= */
+
+#addBtn {
+  width: 100%;
+
+  margin-top: 3px;
+
+  padding: 11px 16px;
+
+  background: var(--primary);
+
+  color: #ffffff;
+
+  border: none;
+
+  border-radius: 8px;
+
+  font: inherit;
+
+  font-size: 0.88rem;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+
+#addBtn:hover {
+  background: var(--primary-hover);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 16px rgba(60, 62, 53, 0.15);
+}
+
+
+#addBtn:active {
+  transform: translateY(0) scale(0.99);
+}
+
+
+/* =========================================================
+   RIGHT DASHBOARD
+   ========================================================= */
+
+.dashboardContainer {
+  padding: 24px;
+
+  /*
+     Gives the dashboard some visual breathing room
+     even when there are no transactions.
+  */
+
+  min-height: 560px;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+
+.summary {
+  display: grid;
+
+  grid-template-columns:
+    1.25fr
+    repeat(3, 1fr);
+
+  gap: 11px;
+
+  margin-bottom: 22px;
+}
+
+
+.summary > div {
+  min-height: 91px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding: 14px 15px;
+
+  background: var(--surface-soft);
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.summary > div:hover {
+  background: var(--surface-hover);
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   MONTH SELECT
+   ========================================================= */
+
+.monthlySummary {
+  gap: 7px;
+}
+
+
+.monthlySummary select {
+  background: var(--surface);
+}
+
+
+/* =========================================================
+   SUMMARY TYPOGRAPHY
+   ========================================================= */
+
+.summary h2 {
+  margin-bottom: 4px;
+
+  color: var(--text-muted);
+
+  font-size: 0.69rem;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.075em;
+}
+
+
+.summary span {
+  color: var(--text);
+
+  font-size: 1.32rem;
+
+  font-weight: 650;
+
+  letter-spacing: -0.03em;
+}
+
+
+#yourIncome {
+  color: var(--income);
+}
+
+
+#yourExpense {
+  color: var(--expense);
+}
+
+
+#yourBalance {
+  color: var(--text);
+}
+
+
+/* =========================================================
+   SEARCH + FILTER
+   ========================================================= */
+
+.searchAndFilter {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-bottom: 18px;
+}
+
+
+.search,
+.filter {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+
+.search {
+  flex: 1;
+
+  max-width: 430px;
+}
+
+
+.filter {
+  width: 170px;
+}
+
+
+/* =========================================================
+   TRANSACTION AREA
+   ========================================================= */
+
+.transactions {
+  flex: 1;
+
+  width: 100%;
+
+  min-height: 270px;
+
+  overflow-x: auto;
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  background: var(--surface-soft);
+
+  /*
+     This keeps the table area visually substantial
+     even before transactions exist.
+  */
+
+  animation: tableAppear 0.6s ease 0.25s both;
+}
+
+
+table {
+  width: 100%;
+
+  min-width: 650px;
+
+  border-collapse: collapse;
+
+  text-align: left;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+thead {
+  background: var(--surface);
+}
+
+
+th {
+  padding: 12px 14px;
+
+  color: var(--text-muted);
+
+  font-size: 0.69rem;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.065em;
+
+  border-bottom: 1px solid var(--border);
+}
+
+
+/* =========================================================
+   TABLE BODY
+   ========================================================= */
+
+td {
+  padding: 13px 14px;
+
+  color: var(--text-secondary);
+
+  font-size: 0.84rem;
+
+  border-bottom: 1px solid var(--border);
+
+  vertical-align: middle;
+}
+
+
+tbody tr {
+  transition:
+    background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+
+tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* Amount */
+
+td:nth-child(4) {
+  color: var(--text);
+
+  font-weight: 650;
+
+  white-space: nowrap;
+}
+
+
+/* Description */
+
+td:nth-child(5) {
+  max-width: 230px;
+
+  color: var(--text-secondary);
+}
+
+
+/* =========================================================
+   DELETE BUTTON
+   ========================================================= */
+
+.delete-btn {
+  margin-left: 7px;
+
+  padding: 5px 8px;
+
+  background: transparent;
+
+  color: var(--expense);
+
+  border: 1px solid transparent;
+
+  border-radius: 6px;
+
+  font: inherit;
+
+  font-size: 0.71rem;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  margin-top: 11px;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.delete-btn:hover {
+  background: var(--expense-soft);
+
+  border-color: var(--border);
+
+  transform: translateY(-1px);
+}
+
+
+.delete-btn:active {
+  transform: scale(0.95);
+}
+
+
+/* =========================================================
+   SUBTLE ANIMATIONS
+   ========================================================= */
+
+@keyframes pageTitle {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes containerEnter {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes tableAppear {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+  main {
+    width: min(760px, calc(100% - 30px));
+
+    padding-top: 32px;
+  }
+
+
+  #themeToggle {
+    top: 28px;
+
+    right: 0;
+  }
+
+
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+
+  .dashboardContainer {
+    min-height: auto;
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  main {
+    width: calc(100% - 22px);
+
+    padding-top: 24px;
+  }
+
+
+  main > h1 {
+    font-size: 1.65rem;
+
+    padding: 0 45px;
+
+    margin-bottom: 25px;
+  }
+
+
+  #themeToggle {
+    top: 20px;
+
+    right: 0;
+  }
+
+
+  .addTransactionContainer,
+  .dashboardContainer {
+    padding: 18px;
+  }
+
+
+  .summary {
+    grid-template-columns: 1fr 1fr;
+  }
+
+
+  .searchAndFilter {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+
+  .search,
+  .filter {
+    width: 100%;
+
+    max-width: none;
+  }
+}
+
+
+@media (max-width: 430px) {
+
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+
+  .summary > div {
+    min-height: 76px;
+  }
+
+
+  main > h1 {
+    font-size: 1.5rem;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+
+    transition: none !important;
+  }
+}

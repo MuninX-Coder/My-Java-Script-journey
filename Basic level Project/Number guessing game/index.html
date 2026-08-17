@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number guessing Game</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+    color: white;
+}
+
+.heading {
+    margin-bottom: 25px;
+}
+
+.heading h1 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+main {
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    text-align: center;
+}
+
+#number-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 1rem;
+}
+
+#number-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#guess-btn {
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+#guess-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+#low-high-msg,
+#attempt-count {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+    </style>
+</head>
+<body>
+    <div class="heading">
+        <h1>Number Guessing Game</h1>
+        
+    </div>
+    <main>
+        <div class="input">
+            <input type="number" placeholder="enter your number" id="number-input">
+        </div>
+        <button id="guess-btn">Guess</button>
+        <div id="low-high-msg"></div>
+        <div id="attempt-count"></div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

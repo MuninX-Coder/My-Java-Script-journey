@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Simulator</title>
+    <style>
+        /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f8fafc;
+}
+
+/* Main Container Card */
+main {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Typography */
+h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 32px;
+    background: linear-gradient(to right, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+}
+
+/* Active Dice Display */
+#displayContainer {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+
+#display {
+    display: block;
+    font-size: 4.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    height: 90px;
+    line-height: 90px;
+    margin-top: 8px;
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    transition: transform 0.1s ease;
+}
+
+/* Interactive Buttons */
+button {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 12px;
+}
+
+#rollBtn {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+#rollBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+    background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+}
+
+#rollBtn:active {
+    transform: translateY(0);
+}
+
+#resetBtn {
+    background: transparent;
+    color: #94a3b8;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    margin-bottom: 32px;
+}
+
+#resetBtn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+/* History & Score Panel */
+.info {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.info div {
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+.info div:last-child {
+    margin-bottom: 0;
+}
+
+/* Data Labels using Pseudo-elements */
+#displayHistory::before {
+    content: "History: ";
+    font-weight: 600;
+    color: #6366f1;
+}
+
+#totalScore::before {
+    content: "Total Score: ";
+    font-weight: 600;
+    color: #10b981;
+}
+
+#displayHistory, #totalScore {
+    word-break: break-all;
+    line-height: 1.5;
+}
+
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Dice simulator</h1>
+
+        <div id="displayContainer">Dice : <span id="display"></span></div>
+        <button id="rollBtn">Roll Dice</button>
+        <button id="resetBtn">Reset</button>
+        <div class="info">
+
+            <div id="displayHistory"></div>
+            <div id="totalScore"></div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

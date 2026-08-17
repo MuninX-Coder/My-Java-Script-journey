@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        /* Reset and Font Setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Centered Layout with Soft Aesthetic Background */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+}
+
+/* Minimalist Card Container */
+main {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Clean Typography */
+h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    letter-spacing: -0.5px;
+}
+
+/* Elegant Date Input */
+#dobInput {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    outline: none;
+    margin-bottom: 1.2rem;
+    background-color: #f8fafc;
+    color: #4a5568;
+    transition: all 0.3s ease;
+}
+
+#dobInput:focus {
+    border-color: #a0aec0;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(160, 174, 192, 0.15);
+}
+
+/* Modern Minimal Button */
+#ageBtn {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #2d3748;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#ageBtn:hover {
+    background-color: #1a202c;
+}
+
+#ageBtn:active {
+    transform: scale(0.98);
+}
+
+/* Display Output Space */
+.displayArea {
+    margin-top: 2rem;
+}
+
+#displayAge, #estimateDays, #nextBirthday {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+/* Empty divs hide until populated */
+.displayArea div:empty {
+    display: none;
+}
+
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Age Calculator</h1>
+        <input type="date" id="dobInput">
+        <button id="ageBtn">My AGE</button>
+        <div class="displayArea">
+            <div id="displayAge"></div>
+            <div id="estimateDays"></div>
+            <div id="nextBirthday"></div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

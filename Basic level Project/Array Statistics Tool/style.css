@@ -1,0 +1,123 @@
+/* 1. Global Reset & Premium Font Setup */
+@import url('https://googleapis.com');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* 2. Full Page Background Center Setup */
+body {
+    background: radial-gradient(circle at top right, #f8fafc, #e2e8f0);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #1e293b;
+    padding: 20px;
+}
+
+/* 3. Main Container Card (Modern Glassmorphism Feel) */
+main {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 
+                0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* 4. Elegant Input Field Style */
+#inputNum {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 15px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 12px;
+    outline: none;
+    color: #0f172a;
+    background-color: #f8fafc;
+    transition: all 0.2s ease-in-out;
+}
+
+#inputNum::placeholder {
+    color: #94a3b8;
+}
+
+/* Input Focus Glow Effect */
+#inputNum:focus {
+    border-color: #6366f1;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* 5. Sleek Premium Action Button */
+#resultBtn {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: #4f46e5;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+}
+
+/* Button Hover & Click Animations */
+#resultBtn:hover {
+    background-color: #4338ca;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px -1px rgba(79, 70, 229, 0.3);
+}
+
+#resultBtn:active {
+    transform: translateY(1px);
+}
+
+/* 6. Dashboard Display Grid Area */
+.displayArea {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* Individual Data Blocks */
+.displayArea > div {
+    background-color: #f8fafc;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #f1f5f9;
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748b;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Highlighted Metric Numbers (The Spans) */
+.displayArea span {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* Extra Touch: Soft Highlight for Max/Min */
+#maxDisplay {
+    color: #10b981; /* Green color for highest value */
+}
+
+#minDisplay {
+    color: #ef4444; /* Red color for lowest value */
+}

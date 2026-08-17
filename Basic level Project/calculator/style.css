@@ -1,0 +1,125 @@
+/* --- 1. Pure Page Ki Settings --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #1e293b, #0f172a); /* Ultra dark background */
+    padding: 20px;
+}
+
+/* --- 2. Display Container (Top Section) --- */
+.displayAreaContainer {
+    width: 100%;
+    max-width: 360px;
+    background: #1e293b;
+    border-radius: 20px 20px 0 0; /* Upper corners rounded */
+    padding: 24px 20px 10px 20px;
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: none;
+}
+
+/* Stunning Neon Text Screen */
+#display {
+    width: 100%;
+    height: 75px;
+    background: #0f172a;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    padding: 0 20px;
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: #38bdf8; /* Cyan neon glow color */
+    text-align: right;
+    letter-spacing: 1px;
+    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+#display::placeholder {
+    color: #334155;
+}
+
+/* --- 3. Buttons Container (Bottom Section) --- */
+.buttonsContainer {
+    width: 100%;
+    max-width: 360px;
+    background: #1e293b;
+    border-radius: 0 0 20px 20px; /* Lower corners rounded */
+    padding: 10px 20px 24px 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: none;
+
+    /* Magic CSS Grid */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 equal layout columns */
+    gap: 12px;
+}
+
+/* --- 4. Beautiful Base Button Style --- */
+.btn {
+    height: 62px;
+    border: none;
+    outline: none;
+    border-radius: 14px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    background: #334155; /* Smooth slate color for numbers */
+    cursor: pointer;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Button Animations */
+.btn:hover {
+    background: #475569;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* --- 5. Custom Grid Mapping & Color Coding --- */
+
+/* Clear (C) Button - Emergency Red Look */
+#clearBtn {
+    background: #ef4444;
+    color: #ffffff;
+    grid-column: span 2; /* 2 column jitni badi width */
+}
+#clearBtn:hover { background: #f87171; }
+
+/* Enter Button - Core Action Green Look */
+#enterBtn {
+    background: #22c55e;
+    color: #ffffff;
+    grid-column: span 2; /* 2 column jitni badi width */
+}
+#enterBtn:hover { background: #4ade80; }
+
+/* Operators Styling (+, -, *, /, .) */
+#divisionBtn, #multiplyBtn, #subtractionBtn, #additionBtn, #dotBtn {
+    background: #0284c7; /* Royal blue accents */
+    color: #ffffff;
+}
+#divisionBtn:hover, #multiplyBtn:hover, #subtractionBtn:hover, #additionBtn:hover, #dotBtn:hover {
+    background: #0ea5e9;
+}
+
+/* Zero Button Adjustment */
+#zeroBtn {
+    grid-column: span 2; /* Standard wide bottom zero button */
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart counter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f4f6f8;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            width: 350px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 1.5rem;
+            color: #222;
+        }
+
+        #display {
+            font-size: 3rem;
+            font-weight: bold;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            color: #111;
+        }
+
+        #steps {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #dcdcdc;
+            border-radius: 10px;
+            outline: none;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        #steps:focus {
+            border-color: #4f46e5;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            flex: 1;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.2s ease;
+        }
+
+        #increment {
+            background: #4f46e5;
+            color: white;
+        }
+
+        #increment:hover {
+            transform: translateY(-2px);
+        }
+
+        #decrement {
+            background: #e5e7eb;
+            color: #111;
+        }
+
+        #decrement:hover {
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+
+<body>
+  
+    <div class="container">
+        <h1>Smart Counter</h1>
+
+        <div id="display">0</div>
+
+        <input type="number" id="steps" placeholder="Enter step value" />
+
+        <div class="btn-group">
+            <button id="increment">Increment</button>
+            <button id="decrement">Decrement</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

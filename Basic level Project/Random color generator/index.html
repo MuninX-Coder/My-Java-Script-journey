@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Color Generator</title>
+    <!-- Google Fonts for clean typography -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Main Interactive Card -->
+        <main class="color-card">
+            <h1>Color Generator</h1>
+            
+            <div class="color-display">
+                <span class="label">Color Code</span>
+                <div id="colorCode"></div>   
+            </div>
+
+            <div class="button-group">
+                <button id="colorBtn" class="btn btn-primary">Change Color</button>
+                <button id="copyBtn" class="btn btn-secondary">Copy Code</button>
+            </div>
+        </main>
+
+        <!-- Sidebar / Bottom History Panel -->
+        <aside class="history-card">
+            <h2>Color History</h2>
+            <div id="colorHistory" class="history-list"></div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

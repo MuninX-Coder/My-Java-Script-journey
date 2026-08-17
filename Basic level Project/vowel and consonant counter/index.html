@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vowel and consonant counter</title>
+    <style>
+        /* 1. Global Reset & Fonts */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* 2. Full Page Styling with Modern Gradient Background */
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* 3. Main Glass Container */
+        main {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* App Title Effect (Optional but looks great) */
+        main::before {
+            content: "Text Analyzer";
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 4. Beautiful Input Box */
+        .input {
+            width: 100%;
+        }
+
+        #input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        #input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        #input::placeholder {
+            color: #64748b;
+        }
+
+        /* 5. Glowing Modern Button */
+        #check-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        #check-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+            background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+        }
+
+        #check-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* 6. Results Display Layout */
+        .display {
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .display>div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.05rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        /* Glowing Numbers inside Span */
+        .display span {
+            font-family: 'Courier New', Courier, monospace;
+            /* Pure coding font for numbers */
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #38bdf8;
+            /* Default beautiful blue sky color */
+            background: rgba(56, 189, 248, 0.1);
+            padding: 4px 12px;
+            border-radius: 8px;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* Alag-alag indicators ke liye unique colors */
+        #vowel-display {
+            color: #34d399;
+            /* Green tint */
+            background: rgba(52, 211, 153, 0.1);
+        }
+
+        #consonant-display {
+            color: #fbbf24;
+            /* Amber/Yellow tint */
+            background: rgba(251, 191, 36, 0.1);
+        }
+
+        #space-display {
+            color: #f472b6;
+            /* Pink tint */
+            background: rgba(244, 114, 182, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="input">
+            <input type="text" id="input" placeholder="enter your text">
+        </div>
+        <button id="check-btn">check</button>
+
+        <div class="display">
+            <div>Vowel: <span id="vowel-display"></span></div>
+            <div>Consonant: <span id="consonant-display"></span></div>
+            <div>Spaces: <span id="space-display"></span></div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

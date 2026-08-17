@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <h1>Personal Finance Tracker</h1>
+        <button id="themeToggle">Mode</button>
+        <div class="container">
+            <div class="addTransactionContainer">
+                <form>
+                    <div>
+                        <label for="enterAmount">Amount</label>
+                        <input type="number" placeholder="amount" id="enterAmount" required>
+
+                    </div>
+                    <div>
+                        <label for="transactionType">Transaction Type:</label>
+                        <select name="transactionType" id="transactionType" required>
+                            <option value="" disabled selected>-- Select Type --</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="enterDate">Date</label>
+                        <input type="date" id="enterDate" required>
+                    </div>
+                    <div>
+                        <label for="enterCategory">Category</label>
+                        <input type="text" id="enterCategory" placeholder="category" required>
+
+                    </div>
+                    <div>
+                        <label for="enterDescription">Description</label>
+                        <textarea name="enterDescription" id="enterDescription" required></textarea>
+                    </div>
+                    <button type="submit" id="addBtn">Add</button>
+
+                </form>
+            </div>
+            <div class="dashboardContainer">
+
+                <div class="summary">
+                    <div class="monthlySummary">
+                        <label for="selectMonth">Select Month</label>
+                        <select id="selectMonth">
+                            <option value="" disabled selected>-- Select Month --</option>
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <h2>Income</h2> <span id="yourIncome"></span>
+                    </div>
+                    <div>
+                        <h2>Expense</h2> <span id="yourExpense"></span>
+                    </div>
+                    <div>
+                        <h2>Balance</h2> <span id="yourBalance"></span>
+                    </div>
+                </div>
+
+                <div class="searchAndFilter">
+                    <div class="search">
+                        <label for="searchItem">Search</label>
+                        <input type="text" id="searchItem">
+                    </div>
+                    <div class="filter">
+                        <select name="filter" id="filterItem">
+                            <option value="allTransaction">All Transaction</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="transactions">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionTableBody">
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

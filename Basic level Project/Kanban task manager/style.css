@@ -1,0 +1,417 @@
+/* ==========================================================================
+   CSS Variables & Matte Cream Palette
+   ========================================================================== */
+:root {
+  /* Ultra-Soft Matte Cream Palette (Zero Glare) */
+  --bg-main: #f6f3eb;
+  --bg-card: #fcfbfa;
+  --bg-column: #eae4d8;
+  --bg-drop-area: rgba(224, 216, 203, 0.4);
+  --bg-input: #f2ece1;
+  
+  --text-main: #36322d;
+  --text-muted: #7d756a;
+  
+  --accent-primary: #8a6a42;
+  --accent-hover: #705330;
+  --accent-light: #e4d8c8;
+  
+  --danger-bg: rgba(189, 61, 61, 0.08);
+  --danger-color: #bd3d3d;
+  
+  /* Soft, Subtle Borders & Soft Glows */
+  --border-color: #dcd4c6;
+  --border-subtle: #e8e2d6;
+  --shadow-color: rgba(54, 50, 45, 0.04);
+  --shadow-hover: rgba(54, 50, 45, 0.08);
+  --soft-glow: rgba(138, 106, 66, 0.12);
+
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Warm Dark Theme (Espresso Charcoal) */
+body.dark-mode {
+  --bg-main: #181614;
+  --bg-card: #24201d;
+  --bg-column: #1e1b18;
+  --bg-drop-area: rgba(36, 32, 29, 0.5);
+  --bg-input: #181614;
+  
+  --text-main: #eae4db;
+  --text-muted: #9c9285;
+  
+  --accent-primary: #bf986a;
+  --accent-hover: #d1ab7d;
+  --accent-light: #362e24;
+  
+  --danger-bg: rgba(224, 93, 93, 0.12);
+  --danger-color: #e05d5d;
+  
+  --border-color: #332d26;
+  --border-subtle: #29241f;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 0, 0, 0.5);
+  --soft-glow: rgba(191, 152, 106, 0.1);
+}
+
+/* ==========================================================================
+   Base Reset
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+main {
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Header & Theme Button */
+#heading {
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.5px;
+}
+
+#themeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  font-size: 1.25rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  transition: transform var(--transition-fast), background-color var(--transition-normal);
+}
+
+#themeBtn:hover {
+  transform: scale(1.12) rotate(12deg);
+}
+
+/* ==========================================================================
+   Kanban Grid & Soft Column Hover Animation
+   ========================================================================== */
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.75rem;
+  padding: 0.5rem;
+}
+
+@media (max-width: 868px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.column-wrapper {
+  background-color: var(--bg-column);
+  border-radius: 18px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 16px var(--shadow-color);
+  transition: transform var(--transition-normal), 
+              box-shadow var(--transition-normal), 
+              border-color var(--transition-normal);
+}
+
+/* Smooth, Non-Dark Column Hover Elevation */
+.column-wrapper:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-color);
+  box-shadow: 0 12px 28px var(--shadow-hover), 0 0 16px var(--soft-glow);
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.column-header h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+/* ==========================================================================
+   Inner Drop Area with Moving Animated Lines on Column Hover
+   ========================================================================== */
+[id$="Column"] {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 220px;
+  padding: 0.85rem;
+  border-radius: 14px;
+  background-color: var(--bg-drop-area);
+  border: 1.5px dashed var(--border-color);
+  transition: background-color var(--transition-normal), 
+              border-color var(--transition-normal);
+}
+
+/* Animated Diagonal Stripe Pattern on Hover */
+.column-wrapper:hover [id$="Column"] {
+  border-color: var(--accent-primary);
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 12px,
+    rgba(138, 106, 66, 0.05) 12px,
+    rgba(138, 106, 66, 0.05) 24px
+  );
+  background-size: 56px 56px;
+  animation: moveStripes 2s linear infinite;
+}
+
+@keyframes moveStripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 56px 0;
+  }
+}
+
+[id$="Column"]::-webkit-scrollbar {
+  width: 5px;
+}
+
+[id$="Column"]::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Task Cards & Side-by-Side Left/Right Buttons
+   ========================================================================== */
+[id$="Column"] > div {
+  background-color: var(--bg-card);
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 6px var(--shadow-color);
+  cursor: grab;
+  user-select: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 0.75rem;
+  position: relative;
+  transition: transform var(--transition-fast), 
+              box-shadow var(--transition-fast), 
+              filter var(--transition-normal), 
+              opacity var(--transition-normal);
+}
+
+[id$="Column"] > div:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px var(--shadow-hover);
+}
+
+/* Card Content Typography */
+[id$="Column"] > div h3,
+[id$="Column"] > div p {
+  grid-column: 1 / -1;
+}
+
+[id$="Column"] > div h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+[id$="Column"] > div p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Left (Edit) and Right (Delete) Action Buttons */
+[id$="Column"] > div button {
+  font-size: 0.825rem;
+  font-weight: 600;
+  padding: 0.45rem 0.85rem;
+  border-radius: 7px;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+  text-transform: capitalize;
+  margin-top: 0.25rem;
+}
+
+/* Left Edit Button */
+[id$="Column"] > div button:nth-of-type(1) {
+  grid-column: 1;
+  justify-self: start;
+}
+
+[id$="Column"] > div button:nth-of-type(1):hover {
+  background-color: var(--accent-light);
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+/* Right Delete Button */
+[id$="Column"] > div button:nth-of-type(2) {
+  grid-column: 2;
+  justify-self: end;
+}
+
+[id$="Column"] > div button:nth-of-type(2):hover {
+  background-color: var(--danger-bg);
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+/* Native Blur State while Dragging */
+[id$="Column"] > div:active {
+  cursor: grabbing;
+  opacity: 0.4;
+  filter: blur(4px);
+  transform: scale(0.97);
+}
+
+/* ==========================================================================
+   Header Add Task Button
+   ========================================================================== */
+#addTaskBtn {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+#addTaskBtn:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Form Modal Popup Alignment (#myForm)
+   ========================================================================== */
+#myForm:not([hidden]) {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 440px;
+  background-color: var(--bg-card);
+  padding: 2.25rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 16px 40px var(--shadow-hover);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: modalPopIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+#myForm input[type="text"],
+#myForm textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background-color: var(--bg-input);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+#myForm input[type="text"]:focus,
+#myForm textarea:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+#myForm > div:last-child {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+#createBtn, #cancelBtn {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+#createBtn {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+}
+
+#createBtn:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+#cancelBtn {
+  background-color: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+}
+
+#cancelBtn:hover {
+  background-color: var(--bg-column);
+  color: var(--text-main);
+}
+
+/* Modal Pop Animation */
+@keyframes modalPopIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -46%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Inspector</title>
+    <style>
+/* Base Reset & Layout */
+* {
+    margin: 0;
+    padding: 0;
+    box-box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background-color: #0f1115; /* Sleek Deep Dark */
+    color: #e2e8f0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    background-color: #1a1d24; /* Card Background */
+    border: 1px solid #2e3440;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Lists styling */
+ul {
+    list-style: none;
+    background-color: #111318;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #4c566a; /* Subtle side border */
+}
+
+/* Specific left border highlight for contrast */
+#valueDisplay {
+    border-left-color: #a3be8c; /* Clean Mint Green for values */
+}
+
+/* Headings inside lists */
+ul big {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: #6f7887;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+/* List Items */
+li {
+    font-family: 'Courier New', Courier, monospace; /* Coding font style */
+    font-size: 1rem;
+    padding: 0.4rem 0;
+    color: #d8dee9;
+    border-bottom: 1px solid #242933;
+}
+
+li:last-child {
+    border-bottom: none; /* Removes border for last element */
+}
+
+/* Count section styling */
+div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #242933;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #aebac7;
+    font-weight: 500;
+}
+
+#totalCount {
+    background-color: #a3be8c; /* Mint highlight */
+    color: #0f1115;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+    </style>
+</head>
+<body>
+    <main>
+        <ul id="keyDisplay">
+            <big>keys</big>
+        </ul>
+        <ul id="valueDisplay">
+            <big>
+                Values
+            </big>
+        </ul>
+        <div>
+            Total count : <span id="totalCount"></span>
+        </div>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main>
+
+        <header>
+            <h1>JSON Formatter</h1>
+            <p>Paste your raw JSON below and format it instantly.</p>
+        </header>
+
+        <section class="editor">
+
+            <label for="inpJosn">Input JSON</label>
+
+            <textarea
+                id="inpJosn"
+                placeholder='{
+  "name": "Munin",
+  "age": 18
+}'></textarea>
+
+            <button id="formatBtn">Format JSON</button>
+
+        </section>
+
+        <section class="output">
+
+            <label for="displayArea">Output</label>
+
+            <pre id="displayArea">Formatted JSON will appear here...</pre>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
