@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Library Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <div class="leftContainer">
+            <div>
+                <form id="myForm">
+                    <div>
+
+                        <label for="Image">Image</label>
+                        <input type="file" id="imgInp">
+                    </div>
+                    <div>
+                        <label for="title">title</label>
+                        <input type="text" placeholder="enter title" id="titleInp">
+                    </div>
+                    <div>
+                        <label for="status">Status</label>
+                        <input type="text" placeholder="enter status" id="statusInp">
+                    </div> 
+                    <button id="addBtn" type="button">add Book</button>
+                </form>
+            </div>
+        </div>
+        <div class="rightContainer">
+            <div class="upperSection">
+                <div>
+                    <input type="text" placeholder="search your book" id="searchInp">
+                </div>
+                <div>
+                    <label for="sortBook">Sort</label>
+                    <select name="sortBook" id="sortBook">
+                        <option value="all" selected>all</option>
+                        <option value="a-to-z">A to Z</option>
+                        <option value="z-to-a">Z to A</option>
+                    </select>
+                </div>
+                <span id="bookCounter"></span>
+            </div>
+            <div class="bookSection">
+
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
