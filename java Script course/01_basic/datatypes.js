@@ -19,5 +19,15 @@ let isCollegeStudent = true;
 // bigInt --> when we are using very big number
 // string -> "", '', ``
 // boolean -> true / false
-// null --> data type v hai and value v hai,  null means kuch nai kuch v nai, empty value
+// null --> data type v hai and value v hai,  null means kuch nai kuch v nai, empty value, stand alone value
 // undefined --->  value nai dena, undefined, variable declare keyai but koi value nai deyai
+// symbol --> used to created unique id, unique banene ke lye used hotai
+
+
+
+// object 
+console.log(typeof null);  // object
+console.log(typeof undefined);  // undefined
+
+
+     

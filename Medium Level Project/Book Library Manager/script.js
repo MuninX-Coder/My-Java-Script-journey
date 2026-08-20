@@ -4,38 +4,51 @@ const statusInp = document.querySelector("#statusInp");
 const addBtn = document.querySelector("#addBtn");
 const searchInp = document.querySelector("#searchInp");
 const sortBook = document.querySelector("#sortBook");
-const bookSection =  document.querySelector(".bookSection");
+const bookSection = document.querySelector(".bookSection");
 const bookCounter = document.querySelector("#bookCounter");
 const myForm = document.querySelector("#myForm");
 
 let bookStorage = [];
 let counter = 0;
-let currentIndexCounter = 0;
+let editingIndex = null;
 
-addBtn.addEventListener("click", function(evt){
-evt.preventDefault();
+addBtn.addEventListener("click", function (evt) {
+  evt.preventDefault();
 
-let imgInpVal = imgInp.value;
-let titleInpVal = titleInp.value;
-let statusInpVal = statusInp.value;
+  if (editingIndex !== null) {
+    bookStorage[editingIndex].bookTitle = titleInp.value;
+    bookStorage[editingIndex].bookStatus = statusInp.value;
 
-let myBooks = {
-    bookImage: imgInpVal,
-    bookTitle : titleInpVal,
-    bookStatus : statusInpVal,
-}
+    editingIndex = null;
+    addBtn.textContent = "add book";
+  } else {
+    let imgInpVal = imgInp.value;
+    let titleInpVal = titleInp.value;
+    let statusInpVal = statusInp.value;
 
-bookStorage.push(myBooks);
-counter++;
-displayBook();
-myForm.reset();
-})
+    let myBooks = {
+      bookImage: imgInpVal,
+      bookTitle: titleInpVal,
+      bookStatus: statusInpVal,
+    };
 
+    bookStorage.push(myBooks);
+    counter++;
+  }
+  displayBook();
+  myForm.reset();
+});
 
-function displayBook (){
-    bookSection.innerHTML = "";
+// 🔥 FIX 1: arr = bookStorage likhne se agar search khali hoga, toh saari books dikhenge
+function displayBook(arr = bookStorage) {
+  bookSection.innerHTML = "";
 
-    bookStorage.forEach((book, index)=>{
+  if (arr) {
+    arr.forEach((book) => {
+      // 🔥 FIX 2: Filtered array mein index badal jata hai, 
+      // isliye original bookStorage ka sahi index yahan se nikalenge:
+      const actualIndex = bookStorage.indexOf(book);
+
       let image = document.createElement("img");
       image.src = book.bookImage;
 
@@ -50,21 +63,54 @@ function displayBook (){
 
       let editbtn = document.createElement("button");
       editbtn.textContent = "edit";
-    
+
       let div = document.createElement("div");
-      
+
       div.appendChild(image);
-      div.appendChild(h2)
-      div.appendChild(p)
+      div.appendChild(h2);
+      div.appendChild(p);
       div.appendChild(editbtn);
-      div.appendChild(deletebtn)
+      div.appendChild(deletebtn);
 
       bookSection.appendChild(div);
-      div.classList.add("styleDiv")
+      div.classList.add("styleDiv");
 
+      // Delete Event Listener using actualIndex
+      deletebtn.addEventListener("click", function () {
+        bookStorage.splice(actualIndex, 1); // Sahi book delete hogi
+        
+        // Delete hone ke baad check karo search box mein kuch likha hai kya?
+        // Agar likha hai toh filtered dikhao, nahi toh saari books dikhao
+        if (searchInp.value.trim() !== "") {
+          let searchText = searchInp.value.toLowerCase();
+          let currentFiltered = bookStorage.filter(b => b.bookTitle.toLowerCase().includes(searchText));
+          displayBook(currentFiltered);
+        } else {
+          displayBook(); 
+        }
+      });
 
-     deletebtn.addEventListener("click", function(){
-        bookStorage.splice(currentIndexCounter, index);
-     })
-    })
+      // Edit Event Listener using actualIndex
+      editbtn.addEventListener("click", function () {
+        titleInp.value = bookStorage[actualIndex].bookTitle; // Sahi data form mein aayega
+        statusInp.value = bookStorage[actualIndex].bookStatus;
+
+        editingIndex = actualIndex; // Sahi index save hoga
+
+        addBtn.textContent = "update book";
+      });
+    });
+  }
 }
+
+// Search Input Listener (Isme koi change nahi, bas call badal gaya)
+searchInp.addEventListener("input", function (evt) {
+  let searchText = evt.target.value.toLowerCase();
+
+  let filteredBook = bookStorage.filter((book) => {
+    return book.bookTitle.toLowerCase().includes(searchText);
+  });
+
+  // Agar search input khali ho jaye, toh auto-fallback ho jayega original array pe
+  displayBook(filteredBook);
+});
