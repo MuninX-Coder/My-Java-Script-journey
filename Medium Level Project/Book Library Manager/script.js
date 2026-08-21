@@ -22,12 +22,12 @@ addBtn.addEventListener("click", function (evt) {
     editingIndex = null;
     addBtn.textContent = "add book";
   } else {
-    let imgInpVal = imgInp.value;
     let titleInpVal = titleInp.value;
     let statusInpVal = statusInp.value;
-
+    let imgFile = imgInp.files[0];
+    let imgUrl = URL.createObjectURL(imgFile);
     let myBooks = {
-      bookImage: imgInpVal,
+      bookImage: imgUrl,
       bookTitle: titleInpVal,
       bookStatus: statusInpVal,
     };
@@ -45,7 +45,7 @@ function displayBook(arr = bookStorage) {
 
   if (arr) {
     arr.forEach((book) => {
-      // 🔥 FIX 2: Filtered array mein index badal jata hai, 
+      // 🔥 FIX 2: Filtered array mein index badal jata hai,
       // isliye original bookStorage ka sahi index yahan se nikalenge:
       const actualIndex = bookStorage.indexOf(book);
 
@@ -78,15 +78,17 @@ function displayBook(arr = bookStorage) {
       // Delete Event Listener using actualIndex
       deletebtn.addEventListener("click", function () {
         bookStorage.splice(actualIndex, 1); // Sahi book delete hogi
-        
+
         // Delete hone ke baad check karo search box mein kuch likha hai kya?
         // Agar likha hai toh filtered dikhao, nahi toh saari books dikhao
         if (searchInp.value.trim() !== "") {
           let searchText = searchInp.value.toLowerCase();
-          let currentFiltered = bookStorage.filter(b => b.bookTitle.toLowerCase().includes(searchText));
+          let currentFiltered = bookStorage.filter((b) =>
+            b.bookTitle.toLowerCase().includes(searchText),
+          );
           displayBook(currentFiltered);
         } else {
-          displayBook(); 
+          displayBook();
         }
       });
 
@@ -113,4 +115,19 @@ searchInp.addEventListener("input", function (evt) {
 
   // Agar search input khali ho jaye, toh auto-fallback ho jayega original array pe
   displayBook(filteredBook);
+});
+
+sortBook.addEventListener("click", function (e) {
+  let sorting = e.target.value;
+  let copyBook = [...bookStorage];
+
+  if (sorting === "all") {
+    displayBook(bookStorage);
+  } else if (sorting === "a-to-z") {
+    copyBook.sort();
+    displayBook(copyBook);
+  } else {
+    copyBook.sort().reverse();
+    displayBook(copyBook);
+  }
 });
