@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Splitter & Settlement Tool</title>
+</head>
+
+<body>
+
+    <main>
+
+        <header>
+            <h1>Expense Splitter</h1>
+            <p>Split shared expenses and settle up easily.</p>
+        </header>
+
+        <section class="peopleSection">
+
+            <h2>People</h2>
+
+            <button id="addPeopleBtn" type="button">
+                Add People
+            </button>
+
+            <form id="addUserForm" hidden>
+
+                <label for="addUserInp">Person Name</label>
+
+                <input type="text" id="addUserInp" placeholder="Enter person name">
+
+                <button type="submit" id="addUser">
+                    Add
+                </button>
+
+            </form>
+
+            <div id="peopleList">
+                <!-- People will be added here dynamically -->
+            </div>
+
+        </section>
+
+
+        <section class="expenseFormSection">
+
+            <h2>Add Expense</h2>
+
+            <button id="addExpenseBtn" type="button">
+                Add Expense
+            </button>
+
+            <form id="addExpenseForm" hidden>
+
+                <div>
+                    <label for="purposeInp">Purpose</label>
+
+                    <input type="text" id="purposeInp" placeholder="e.g. Hotel">
+                </div>
+
+
+                <div>
+                    <label for="amountInp">Amount</label>
+
+                    <input type="number" id="amountInp" placeholder="Enter amount">
+                </div>
+
+
+                <div class="paidUserContainer">
+
+                    <label for="paidUser">
+                        Paid By
+                    </label>
+
+                    <select id="paidUser" name="paidUser">
+                        <!-- People will be added dynamically -->
+                    </select>
+
+                </div>
+
+
+                <div class="splitUserContainer">
+
+                    <p>Shared By</p>
+
+                    <div id="sharedUsers">
+                        <!-- Checkboxes for people will be added dynamically -->
+                    </div>
+
+                </div>
+
+
+                <button type="submit" id="addUserExpenseBtn">
+                    Add Expense
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <section class="expenseSection">
+
+            <h2>Expenses</h2>
+
+            <div id="expenseList">
+                <!-- Expenses will be added here dynamically -->
+            </div>
+
+        </section>
+
+
+        <section class="settlementSection">
+
+            <h2>Settlement Summary</h2>
+
+            <div id="settlementList">
+                <!-- Settlement results will be added here dynamically -->
+            </div>
+
+        </section>
+
+    </main>
+<script src="scrpt.js"></script>
+</body>
+
+</html>
