@@ -29,44 +29,149 @@ addUser.addEventListener("click", function (e) {
   e.preventDefault();
   let addUserInpVal = addUserInp.value;
 
-  if(addUserInpVal.trim() === ""){
+  if (addUserInpVal.trim() === "") {
     alert("add user Name");
-} else {
+  } else {
     peopleStorage.push(addUserInpVal);
     renderPerson();
-}
-addUserForm.reset();
+    addPeopleToSelect();
+    addPeopleToSharedUsers();
+  }
+  addUserForm.reset();
 });
 
-
 // a render function to render the people in UI
-function renderPerson(){
-    peopleList.innerHTML = "";
-    let ul = document.createElement("ul");
-    peopleStorage.forEach((people)=>{
-       let li = document.createElement("li");
-       li.textContent = people;
-       ul.appendChild(li);
-       peopleList.appendChild(ul);
-        
-    })
+function renderPerson() {
+  peopleList.innerHTML = "";
+  let ul = document.createElement("ul");
+  peopleStorage.forEach((people) => {
+    let li = document.createElement("li");
+    li.textContent = people;
+    ul.appendChild(li);
+    peopleList.appendChild(ul);
+  });
+}
+
+// expense btn logic to undhide the form
+addExpenseBtn.addEventListener("click", function () {
+  addExpenseForm.hidden = false;
+});
+
+// expense logic to add the expense
+addUserExpenseBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  let purposeInpVal = purposeInp.value;
+  let amountInpVal = amountInp.value;
+  let paidUserVal = paidUser.value;
+  let sharedByUsers = [];
+
+  let sharedUsersValue = sharedUsers.querySelectorAll('input[type="checkbox"]');
+
+  sharedUsersValue.forEach((val) => {
+    if (val.checked) {
+      sharedByUsers.push(val.value);
+    }
+  });
+
+
+  if(purposeInpVal.trim() === ""){
+    alert("enter the purpose");
+  } else if(Number(amountInpVal) <= 0){
+    alert("enter the amount");
+  } else if (paidUserVal === ""){
+    alert("select the paid user")
+  } else if(sharedByUsers.length === 0){
+    alert("check atlest one user");
+  } else {
+    let myExpenseObj = {
+        purpose: purposeInpVal,
+        amount: Number(amountInpVal),
+        paidUser: paidUserVal,
+        sharedUser: sharedByUsers,
+    }
+
+    expenseStorage.push(myExpenseObj);
+    renderMyExpenses();
+    addExpenseForm.reset();
+  }
+
+});
+
+function addPeopleToSelect() {
+  paidUser.innerHTML = "";
+  peopleStorage.forEach((people) => {
+    const option = document.createElement("option");
+    option.text = people;
+    option.value = people.toLowerCase();
+
+    paidUser.appendChild(option);
+  });
+}
+
+function addPeopleToSharedUsers() {
+  sharedUsers.innerHTML = "";
+
+  peopleStorage.forEach((people) => {
+    let divWrapper = document.createElement("div");
+
+    let checkBox = document.createElement("input");
+    checkBox.type = "checkbox";
+    checkBox.id = people.toLowerCase();
+    checkBox.value = people;
+
+    let label = document.createElement("label");
+    label.htmlFor = checkBox.id;
+    label.textContent = people;
+
+    divWrapper.appendChild(checkBox);
+    divWrapper.appendChild(label);
+
+    sharedUsers.appendChild(divWrapper);
+  });
 }
 
 
-// expense btn logic to undhide the form
-addExpenseBtn.addEventListener("click", function(){
-    addExpenseForm.hidden = false;
-})
+function renderMyExpenses(){
+expenseList.innerHTML = "";
+
+expenseStorage.forEach((expense, index)=>{
+    let mainDiv = document.createElement("div");
+
+    let h2 = document.createElement("h2");
+    h2.textContent = expense.purpose;
+
+    let p = document.createElement("p");
+    p.textContent = `Amount: $${expense.amount}`;
+
+    let p2 = document.createElement("p");
+    p2.textContent = `paid by: ${expense.paidUser}`;
+
+    let p3 = document.createElement("p");
+    p3.textContent = `shared by: ${expense.sharedUser}`;
+
+    let editBtn = document.createElement("button");
+    editBtn.textContent = "edit";
+
+    let deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "delete";
+
+    mainDiv.appendChild(h2)
+    mainDiv.appendChild(p)
+    mainDiv.appendChild(p2)
+    mainDiv.appendChild(p3)
+    mainDiv.appendChild(editBtn)
+    mainDiv.appendChild(deleteBtn)
+    expenseList.appendChild(mainDiv);
 
 
-// expense logic to add the expense 
-addUserExpenseBtn.addEventListener("click", function(e){
-    e.preventDefault();
-    let purposeInpVal = purposeInp.value;
-    let amountInpVal = amountInp.value;
-    
-    console.log(purposeInpVal);
-    console.log(amountInpVal);
-    
-    
+    deleteBtn.addEventListener("click", function(){
+        expenseStorage.splice(index,1);
+        renderMyExpenses();
+    })
+
+    editBtn.addEventListener("click", function(){
+        
+    })
 })
+
+}
