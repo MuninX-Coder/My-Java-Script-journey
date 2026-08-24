@@ -1,37 +1,58 @@
-/* =========================================================
-   Expense Splitter — Clean Editorial Dashboard
-   ========================================================= */
+
+/* ============================================================
+   EXPENSE SPLITTER
+   GRAPHITE OPERATIONS INTERFACE
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;600;700;800&display=swap');
+
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
 
 :root {
-    --bg: #f4f1eb;
-    --surface: #fffdf9;
-    --surface-soft: #f8f6f1;
-    --text: #20201e;
-    --muted: #77746d;
-    --border: #dedbd3;
-    --border-dark: #c9c5bb;
+    --black: #070809;
+    --graphite: #0d0f11;
+    --panel: #111417;
+    --panel-alt: #15191d;
 
-    --accent: #315c4d;
-    --accent-dark: #25483d;
-    --accent-soft: #e3ebe6;
+    --line: rgba(255, 255, 255, 0.11);
+    --line-strong: rgba(255, 255, 255, 0.2);
 
-    --danger: #a34c43;
-    --danger-soft: #f3e5e2;
+    --white: #f1f2ee;
+    --muted: #7b8289;
+    --dim: #555d64;
 
-    --radius: 14px;
-    --radius-small: 9px;
+    --amber: #f2a900;
+    --amber-soft: rgba(242, 169, 0, 0.12);
 
-    --shadow: 0 8px 24px rgba(42, 40, 35, 0.06);
+    --green: #38c58b;
+    --green-soft: rgba(56, 197, 139, 0.1);
+
+    --red: #f05b65;
+    --red-soft: rgba(240, 91, 101, 0.1);
+
+    --blue: #5794ff;
+
+    --heading: "Manrope", sans-serif;
+    --body: "Manrope", sans-serif;
+    --mono: "DM Mono", monospace;
+
+    --fast: 180ms cubic-bezier(.16, 1, .3, 1);
+    --smooth: 320ms cubic-bezier(.16, 1, .3, 1);
 }
 
-/* ---------------------------------------------------------
-   Reset
-   --------------------------------------------------------- */
+
+/* ============================================================
+   RESET
+   ============================================================ */
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+
+    box-sizing: border-box;
 }
 
 html {
@@ -40,595 +61,1216 @@ html {
 
 body {
     min-height: 100vh;
-    background: var(--bg);
-    color: var(--text);
-    font-family:
-        Inter,
-        ui-sans-serif,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-    line-height: 1.5;
+
+    background-color: var(--black);
+
+    /*
+       Very subtle technical grid.
+       Not bright enough to compete with the UI.
+    */
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px
+        );
+
+    background-size: 48px 48px;
+
+    color: var(--white);
+
+    font-family: var(--body);
+
+    line-height: 1.45;
+
+    padding: 48px 28px;
+
+    -webkit-font-smoothing: antialiased;
 }
 
-button,
-input,
-select {
-    font: inherit;
-}
 
-button {
-    cursor: pointer;
-}
-
-/* ---------------------------------------------------------
-   Main Layout
-   --------------------------------------------------------- */
+/* ============================================================
+   APPLICATION CANVAS
+   ============================================================ */
 
 main {
-    width: min(1380px, calc(100% - 48px));
+    width: min(1280px, 100%);
+
     margin: 0 auto;
-    padding: 46px 0 70px;
 
     display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
-    grid-template-areas:
-        "header header"
-        "people expense-form"
-        "expenses settlement";
-    gap: 22px;
+
+    grid-template-columns:
+        repeat(12, minmax(0, 1fr));
+
+    gap: 18px;
 }
 
-/* ---------------------------------------------------------
-   Header
-   --------------------------------------------------------- */
+
+/* ============================================================
+   HEADER
+   ============================================================ */
 
 header {
-    grid-area: header;
+    grid-column: 1 / -1;
+
+    min-height: 180px;
 
     display: flex;
+
     align-items: flex-end;
+
     justify-content: space-between;
 
-    padding: 8px 4px 28px;
+    gap: 40px;
 
-    border-bottom: 1px solid var(--border);
+    padding: 0 0 28px;
+
+    border-bottom: 1px solid var(--line);
+
+    position: relative;
+
+    animation: enter 600ms cubic-bezier(.16, 1, .3, 1) both;
 }
+
+
+/* Small system identifier */
+
+header::before {
+    content: "EXPENSE SYSTEM / 001";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    color: var(--dim);
+
+    font-family: var(--mono);
+
+    font-size: 10px;
+
+    letter-spacing: .12em;
+}
+
+
+/* Orange status indicator */
+
+header::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    top: 4px;
+
+    width: 7px;
+    height: 7px;
+
+    background: var(--green);
+
+    box-shadow: 0 0 14px rgba(56, 197, 139, .45);
+}
+
 
 header h1 {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(2.4rem, 5vw, 4.4rem);
-    font-weight: 500;
-    letter-spacing: -0.055em;
-    line-height: 0.95;
+    margin-top: 35px;
+
+    font-family: var(--heading);
+
+    font-size: clamp(3rem, 7vw, 6rem);
+
+    font-weight: 800;
+
+    letter-spacing: -.075em;
+
+    line-height: .86;
+
+    text-transform: uppercase;
+
+    color: var(--white);
 }
+
 
 header p {
-    max-width: 320px;
+    max-width: 260px;
+
+    margin-bottom: 4px;
+
     color: var(--muted);
-    font-size: 0.92rem;
-    line-height: 1.6;
-    text-align: right;
+
+    font-family: var(--mono);
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+    text-transform: uppercase;
+
+    letter-spacing: .06em;
 }
 
-/* ---------------------------------------------------------
-   Section Base
-   --------------------------------------------------------- */
 
-.peopleSection,
-.expenseFormSection,
-.expenseSection,
-.settlementSection {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
+/* ============================================================
+   BASE PANELS
+   ============================================================ */
+
+section {
+    position: relative;
+
+    background: var(--panel);
+
+    border: 1px solid var(--line);
+
+    border-radius: 0;
+
+    padding: 25px;
+
+    overflow: hidden;
+
+    transition:
+        border-color var(--fast),
+        transform var(--fast),
+        background var(--fast);
+
+    animation: enter 600ms cubic-bezier(.16, 1, .3, 1) both;
 }
 
-/* Assign areas */
+
+/*
+   Tiny technical corner marker.
+*/
+
+section::before {
+    content: "";
+
+    position: absolute;
+
+    top: -1px;
+    left: -1px;
+
+    width: 13px;
+    height: 13px;
+
+    border-top: 2px solid var(--amber);
+
+    border-left: 2px solid var(--amber);
+
+    opacity: 0;
+
+    transition: opacity var(--fast);
+}
+
+section:hover {
+    border-color: var(--line-strong);
+
+    background: #121518;
+}
+
+section:hover::before {
+    opacity: 1;
+}
+
+
+/* ============================================================
+   SECTION HEADINGS
+   ============================================================ */
+
+section h2 {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 23px;
+
+    color: var(--white);
+
+    font-family: var(--heading);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: .1em;
+
+    text-transform: uppercase;
+}
+
+section h2::before {
+    content: "";
+
+    width: 4px;
+    height: 17px;
+
+    background: var(--amber);
+}
+
+
+/* ============================================================
+   BENTO ARCHITECTURE
+   ============================================================ */
 
 .peopleSection {
-    grid-area: people;
+    grid-column: span 4;
 }
 
 .expenseFormSection {
-    grid-area: expense-form;
+    grid-column: span 8;
 }
 
 .expenseSection {
-    grid-area: expenses;
+    grid-column: span 7;
 }
 
 .settlementSection {
-    grid-area: settlement;
+    grid-column: span 5;
 }
 
-/* ---------------------------------------------------------
-   Section Header
-   --------------------------------------------------------- */
 
-.peopleSection,
-.expenseFormSection,
-.expenseSection,
-.settlementSection {
-    padding: 25px;
-}
-
-.peopleSection > h2,
-.expenseFormSection > h2,
-.expenseSection > h2,
-.settlementSection > h2 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 20px;
-
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-}
-
-/* ---------------------------------------------------------
-   Buttons
-   --------------------------------------------------------- */
+/* ============================================================
+   BUTTON SYSTEM
+   ============================================================ */
 
 button {
+    appearance: none;
+
     border: 1px solid transparent;
-    border-radius: var(--radius-small);
-    padding: 10px 15px;
 
-    background: var(--accent);
-    color: white;
+    border-radius: 0;
 
-    font-size: 0.84rem;
-    font-weight: 650;
+    background: var(--white);
+
+    color: var(--black);
+
+    padding: 11px 15px;
+
+    font-family: var(--mono);
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    letter-spacing: .08em;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
 
     transition:
-        background 160ms ease,
-        border-color 160ms ease,
-        transform 160ms ease;
+        transform var(--fast),
+        background var(--fast),
+        border-color var(--fast),
+        color var(--fast),
+        box-shadow var(--fast);
 }
 
 button:hover {
-    background: var(--accent-dark);
+    background: var(--amber);
+
+    color: #000;
+
+    transform: translate(-2px, -2px);
+
+    box-shadow:
+        4px 4px 0 rgba(242, 169, 0, .22);
 }
 
 button:active {
-    transform: translateY(1px);
+    transform: translate(0, 0);
+
+    box-shadow: none;
 }
 
-#addPeopleBtn,
-#addExpenseBtn {
-    margin-bottom: 18px;
+
+/* ============================================================
+   PEOPLE
+   ============================================================ */
+
+.peopleSection {
+    min-height: 260px;
 }
 
-/* ---------------------------------------------------------
-   Forms
-   --------------------------------------------------------- */
+.peopleSection::after {
+    content: "01";
 
-form {
-    display: grid;
-    gap: 16px;
+    position: absolute;
 
-    padding: 17px;
+    top: 26px;
+    right: 25px;
 
-    background: var(--surface-soft);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-small);
+    color: var(--dim);
+
+    font-family: var(--mono);
+
+    font-size: 10px;
 }
 
-form > div {
-    display: grid;
-    gap: 6px;
+
+#peopleList {
+    margin-top: 23px;
 }
 
-label,
-.splitUserContainer > p {
-    color: var(--muted);
-    font-size: 0.75rem;
-    font-weight: 650;
-    letter-spacing: 0.04em;
+#peopleList ul {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    list-style: none;
 }
 
-input,
-select {
-    width: 100%;
-    min-height: 42px;
 
-    padding: 9px 11px;
+#peopleList li {
+    position: relative;
 
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    padding: 8px 11px 8px 14px;
 
-    background: white;
-    color: var(--text);
+    background: var(--panel-alt);
 
-    outline: none;
+    border: 1px solid var(--line);
+
+    border-left: 3px solid var(--blue);
+
+    color: var(--white);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    animation: pop .35s cubic-bezier(.34, 1.56, .64, 1) both;
 
     transition:
-        border-color 160ms ease,
-        box-shadow 160ms ease;
+        background var(--fast),
+        border-color var(--fast),
+        transform var(--fast);
 }
 
-input::placeholder {
-    color: #aaa69d;
+
+#peopleList li:hover {
+    background: #191d22;
+
+    border-color: var(--line-strong);
+
+    transform: translateY(-2px);
 }
 
-input:focus,
-select:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(49, 92, 77, 0.10);
-}
 
-/* ---------------------------------------------------------
-   Add People Form
-   --------------------------------------------------------- */
+/* ============================================================
+   ADD PEOPLE FORM
+   ============================================================ */
 
 #addUserForm {
+    margin-top: 20px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid var(--line);
+
+    display: grid;
+
     grid-template-columns: 1fr auto;
-    align-items: end;
+
+    gap: 12px;
 }
+
 
 #addUserForm label {
     grid-column: 1 / -1;
 }
 
-#addUserForm input {
-    min-width: 0;
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+
+form {
+    animation: formEnter .35s cubic-bezier(.16, 1, .3, 1);
 }
 
-#addUser {
-    height: 42px;
+form[hidden] {
+    display: none !important;
 }
 
-/* ---------------------------------------------------------
-   Expense Form
-   --------------------------------------------------------- */
-
-#addExpenseForm {
-    grid-template-columns: 1fr 1fr;
-}
-
-#addExpenseForm > div:first-child {
-    grid-column: 1 / -1;
-}
-
-.paidUserContainer {
-    grid-column: 1 / -1;
-}
-
-.splitUserContainer {
-    grid-column: 1 / -1;
-}
-
-/* ---------------------------------------------------------
-   Shared Users
-   --------------------------------------------------------- */
-
-#sharedUsers {
+form > div {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 5px;
+
+    flex-direction: column;
+
+    gap: 7px;
 }
 
-#sharedUsers > div {
-    position: relative;
+
+label,
+.splitUserContainer p {
+    color: var(--muted);
+
+    font-family: var(--mono);
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    letter-spacing: .09em;
+
+    text-transform: uppercase;
 }
 
-#sharedUsers input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-}
 
-#sharedUsers label {
-    display: block;
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
 
-    padding: 7px 11px;
+    border: 1px solid var(--line);
 
-    border: 1px solid var(--border);
-    border-radius: 999px;
+    border-radius: 0;
 
-    background: white;
-    color: var(--text);
+    outline: none;
 
-    font-size: 0.78rem;
-    cursor: pointer;
+    background: #15191d;
+
+    color: var(--white);
+
+    padding: 12px 13px;
+
+    font-family: var(--body);
+
+    font-size: 13px;
 
     transition:
-        background 150ms ease,
-        border-color 150ms ease,
-        color 150ms ease;
+        border-color var(--fast),
+        background var(--fast),
+        box-shadow var(--fast);
 }
 
-#sharedUsers input:checked + label {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    color: var(--accent-dark);
+
+input::placeholder {
+    color: var(--dim);
 }
 
-/* Submit expense */
 
+input:hover,
+select:hover {
+    border-color: var(--line-strong);
+}
+
+
+input:focus,
+select:focus {
+    border-color: var(--amber);
+
+    background: #181c21;
+
+    box-shadow:
+        0 0 0 1px var(--amber-soft);
+}
+
+
+/* ============================================================
+   EXPENSE FORM
+   ============================================================ */
+
+#addExpenseForm {
+    margin-top: 21px;
+
+    padding-top: 21px;
+
+    border-top: 1px solid var(--line);
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 21px 24px;
+}
+
+
+.paidUserContainer,
+.splitUserContainer,
 #addUserExpenseBtn {
     grid-column: 1 / -1;
-    margin-top: 3px;
 }
 
-/* ---------------------------------------------------------
-   People
-   --------------------------------------------------------- */
 
-#peopleList {
-    min-height: 70px;
-}
+/* ============================================================
+   SHARED USERS
+   ============================================================ */
 
-#peopleList ul {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 8px;
-
-    list-style: none;
-}
-
-#peopleList li {
-    position: relative;
-
-    padding: 12px 13px 12px 16px;
-
-    background: var(--surface-soft);
-    border: 1px solid var(--border);
-    border-radius: 9px;
-
-    font-size: 0.87rem;
-    font-weight: 600;
-}
-
-#peopleList li::before {
-    content: "";
-
-    position: absolute;
-    left: 7px;
-    top: 50%;
-    width: 3px;
-    height: 3px;
-
-    border-radius: 50%;
-    background: var(--accent);
-
-    transform: translateY(-50%);
-}
-
-/* ---------------------------------------------------------
-   Expenses Grid
-   --------------------------------------------------------- */
-
-#expenseList {
+#sharedUsers {
     display: grid;
 
     grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+        repeat(auto-fill, minmax(125px, 1fr));
 
-    gap: 12px;
+    gap: 7px;
 }
 
-/* Generated expense cards */
+
+#sharedUsers > div {
+    display: flex;
+
+    flex-direction: row;
+
+    align-items: center;
+
+    gap: 9px;
+
+    min-height: 43px;
+
+    padding: 8px 10px;
+
+    background: #15191d;
+
+    border: 1px solid var(--line);
+
+    cursor: pointer;
+
+    transition:
+        border-color var(--fast),
+        background var(--fast);
+}
+
+
+#sharedUsers > div:hover {
+    border-color: var(--line-strong);
+
+    background: #191d22;
+}
+
+
+#sharedUsers input[type="checkbox"] {
+    appearance: none;
+
+    flex-shrink: 0;
+
+    width: 15px;
+    height: 15px;
+
+    margin: 0;
+
+    border: 1px solid var(--dim);
+
+    border-radius: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    position: relative;
+}
+
+
+#sharedUsers input[type="checkbox"]:checked {
+    background: var(--amber);
+
+    border-color: var(--amber);
+}
+
+
+#sharedUsers input[type="checkbox"]:checked::after {
+    content: "";
+
+    position: absolute;
+
+    width: 5px;
+    height: 8px;
+
+    left: 4px;
+    top: 1px;
+
+    border-right: 2px solid #000;
+
+    border-bottom: 2px solid #000;
+
+    transform: rotate(45deg);
+}
+
+
+#sharedUsers label {
+    margin: 0;
+
+    color: var(--white);
+
+    cursor: pointer;
+
+    font-family: var(--body);
+
+    font-size: 11px;
+
+    letter-spacing: 0;
+
+    text-transform: none;
+}
+
+
+/* ============================================================
+   EXPENSE LIST
+   ============================================================ */
+
+.expenseSection {
+    min-height: 350px;
+}
+
+.expenseSection::after {
+    content: "02";
+
+    position: absolute;
+
+    top: 26px;
+    right: 25px;
+
+    color: var(--dim);
+
+    font-family: var(--mono);
+
+    font-size: 10px;
+}
+
+
+#expenseList {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
 
 #expenseList > div {
     position: relative;
 
-    display: flex;
-    flex-direction: column;
+    display: grid;
 
-    min-height: 190px;
-    padding: 18px;
+    grid-template-columns:
+        minmax(120px, 1fr)
+        auto;
 
-    background: var(--surface-soft);
-    border: 1px solid var(--border);
-    border-radius: 11px;
+    gap: 6px 20px;
+
+    align-items: center;
+
+    padding: 15px 17px;
+
+    background: #13171a;
+
+    border: 1px solid var(--line);
+
+    overflow: hidden;
 
     transition:
-        border-color 160ms ease,
-        transform 160ms ease;
+        transform var(--fast),
+        border-color var(--fast),
+        background var(--fast);
 }
+
+
+#expenseList > div::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 2px;
+
+    background: var(--green);
+
+    transform: scaleY(0);
+
+    transform-origin: bottom;
+
+    transition: transform var(--fast);
+}
+
 
 #expenseList > div:hover {
-    border-color: var(--border-dark);
-    transform: translateY(-2px);
+    transform: translateX(4px);
+
+    border-color: var(--line-strong);
+
+    background: #171b1f;
 }
+
+
+#expenseList > div:hover::before {
+    transform: scaleY(1);
+}
+
 
 #expenseList h2 {
-    margin-bottom: 14px;
+    grid-column: 1;
 
-    font-size: 1rem;
+    margin: 0;
+
+    font-family: var(--heading);
+
+    font-size: 13px;
+
     font-weight: 700;
-    letter-spacing: -0.01em;
+
+    text-transform: none;
 }
 
-#expenseList p {
+
+#expenseList h2::before {
+    display: none;
+}
+
+
+/* Amount */
+
+#expenseList p:nth-of-type(1) {
+    grid-column: 2;
+
+    grid-row: 1;
+
+    color: var(--green);
+
+    font-family: var(--mono);
+
+    font-size: 16px;
+
+    font-weight: 500;
+}
+
+
+/* Paid by */
+
+#expenseList p:nth-of-type(2) {
+    grid-column: 1;
+
     color: var(--muted);
-    font-size: 0.78rem;
-    margin-bottom: 4px;
+
+    font-size: 10px;
 }
 
-/* Amount gets visual priority */
 
-#expenseList p:first-of-type {
-    order: -1;
+/* Shared by */
 
-    color: var(--accent-dark);
-    font-size: 1.3rem;
-    font-weight: 750;
-    margin-bottom: 12px;
+#expenseList p:nth-of-type(3) {
+    grid-column: 1;
+
+    color: var(--dim);
+
+    font-size: 10px;
 }
 
-/* Buttons at bottom */
+
+/* Buttons */
 
 #expenseList button {
-    margin-top: auto;
-    align-self: flex-start;
+    grid-row: 2;
 
-    padding: 7px 10px;
+    padding: 5px 8px;
 
-    font-size: 0.72rem;
+    background: transparent;
+
+    border: 1px solid var(--line);
+
+    color: var(--muted);
+
+    box-shadow: none;
+
+    font-size: 9px;
 }
 
-#expenseList button:nth-last-child(2) {
-    margin-right: 5px;
+
+#expenseList button:hover {
+    transform: none;
+
+    background: var(--white);
+
+    border-color: var(--white);
+
+    color: var(--black);
+
+    box-shadow: none;
 }
 
-/* Delete button */
 
 #expenseList button:last-child {
-    background: transparent;
-    border-color: var(--border);
-    color: var(--danger);
+    margin-left: 5px;
+
+    border-color: rgba(240, 91, 101, .25);
+
+    color: var(--red);
+
+    background: var(--red-soft);
 }
+
 
 #expenseList button:last-child:hover {
-    background: var(--danger-soft);
-    border-color: #dfc0bb;
+    background: var(--red);
+
+    border-color: var(--red);
+
+    color: white;
 }
 
-/* ---------------------------------------------------------
-   Settlement
-   --------------------------------------------------------- */
+
+/* ============================================================
+   SETTLEMENT
+   ============================================================ */
+
+.settlementSection {
+    min-height: 350px;
+}
+
+.settlementSection::after {
+    content: "03";
+
+    position: absolute;
+
+    top: 26px;
+    right: 25px;
+
+    color: var(--dim);
+
+    font-family: var(--mono);
+
+    font-size: 10px;
+}
+
+
+#settlementBtn {
+    margin-bottom: 22px;
+
+    background: transparent;
+
+    border: 1px solid var(--line-strong);
+
+    color: var(--white);
+
+    box-shadow: none;
+}
+
+
+#settlementBtn:hover {
+    background: var(--amber);
+
+    border-color: var(--amber);
+
+    color: #000;
+}
+
+
+/* ============================================================
+   SETTLEMENT RESULTS
+   ============================================================ */
 
 #settlementList {
-    display: grid;
-    gap: 9px;
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
 }
+
+
+#settlementList h3 {
+    padding: 17px;
+
+    border: 1px solid rgba(242, 169, 0, .28);
+
+    border-left: 3px solid var(--amber);
+
+    background: var(--amber-soft);
+
+    color: var(--amber);
+
+    font-family: var(--mono);
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+
+#settlementList > p {
+    color: var(--muted);
+
+    font-family: var(--mono);
+
+    font-size: 10px;
+
+    padding: 3px 0 12px;
+
+    border-bottom: 1px solid var(--line);
+}
+
 
 #settlementList > div {
-    padding: 13px 14px;
+    padding: 13px 15px;
 
-    border: 1px solid var(--border);
-    border-radius: 9px;
+    background: #15191d;
 
-    background: var(--surface-soft);
+    border: 1px solid var(--line);
 
-    font-size: 0.82rem;
+    border-left: 3px solid var(--amber);
+
+    animation: settlementEnter .4s cubic-bezier(.16, 1, .3, 1) both;
 }
 
-/* ---------------------------------------------------------
-   Empty States
-   --------------------------------------------------------- */
 
-#peopleList:empty::before,
-#expenseList:empty::before,
-#settlementList:empty::before {
-    display: block;
+#settlementList > div p {
+    margin: 0;
 
-    color: #aaa69d;
-    font-size: 0.8rem;
+    color: var(--white);
+
+    font-family: var(--mono);
+
+    font-size: 10px;
 }
 
-#peopleList:empty::before {
-    content: "No people added yet.";
+
+#settlementList > div p::before {
+    content: "→ ";
+
+    color: var(--amber);
 }
 
-#expenseList:empty::before {
-    content: "Your expenses will appear here.";
-}
 
-#settlementList:empty::before {
-    content: "Settlement details will appear here.";
-}
-
-/* ---------------------------------------------------------
-   Hidden Attribute
-   --------------------------------------------------------- */
+/* ============================================================
+   HIDDEN
+   ============================================================ */
 
 [hidden] {
     display: none !important;
 }
 
-/* ---------------------------------------------------------
-   Responsive
-   --------------------------------------------------------- */
 
-@media (max-width: 1050px) {
-    main {
-        grid-template-columns: 1fr 1fr;
+/* ============================================================
+   FOCUS
+   ============================================================ */
 
-        grid-template-areas:
-            "header header"
-            "people expense-form"
-            "expenses expenses"
-            "settlement settlement";
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+label:focus-visible {
+    outline: 1px solid var(--amber);
+
+    outline-offset: 3px;
+}
+
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes enter {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(12px);
     }
 
-    #expenseList {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
     }
 }
 
+
+@keyframes pop {
+
+    from {
+        opacity: 0;
+
+        transform: scale(.92);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: scale(1);
+    }
+}
+
+
+@keyframes formEnter {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(-7px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes settlementEnter {
+
+    from {
+        opacity: 0;
+
+        transform: translateX(10px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateX(0);
+    }
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1050px) {
+
+    body {
+        padding: 32px 20px;
+    }
+
+    .peopleSection {
+        grid-column: span 5;
+    }
+
+    .expenseFormSection {
+        grid-column: span 7;
+    }
+
+    .expenseSection {
+        grid-column: span 12;
+    }
+
+    .settlementSection {
+        grid-column: span 12;
+    }
+}
+
+
+/* ============================================================
+   TABLET / MOBILE
+   ============================================================ */
+
 @media (max-width: 760px) {
+
+    body {
+        padding: 25px 16px;
+    }
+
     main {
-        width: min(100% - 28px, 600px);
-        padding-top: 28px;
-
-        grid-template-columns: 1fr;
-
-        grid-template-areas:
-            "header"
-            "people"
-            "expense-form"
-            "expenses"
-            "settlement";
-
-        gap: 14px;
+        display: block;
     }
 
     header {
-        display: block;
-        padding-bottom: 22px;
+        min-height: 160px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        justify-content: flex-end;
+
+        padding-bottom: 25px;
     }
 
     header h1 {
-        font-size: 2.7rem;
+        font-size: clamp(2.8rem, 15vw, 4.5rem);
     }
 
     header p {
-        margin-top: 12px;
-        text-align: left;
+        max-width: 350px;
     }
 
-    .peopleSection,
-    .expenseFormSection,
-    .expenseSection,
-    .settlementSection {
-        padding: 18px;
+    section {
+        margin-top: 14px;
     }
 
-    #expenseList {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    main {
-        width: calc(100% - 20px);
-    }
-
-    #addUserForm,
     #addExpenseForm {
         grid-template-columns: 1fr;
     }
 
-    #addUserForm label,
-    #addExpenseForm > div,
     .paidUserContainer,
     .splitUserContainer,
     #addUserExpenseBtn {
         grid-column: auto;
     }
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 18px 12px;
+    }
+
+    section {
+        padding: 19px;
+    }
+
+    header h1 {
+        font-size: 2.9rem;
+    }
+
+    #addUserForm {
+        grid-template-columns: 1fr;
+    }
 
     #addUser {
-        width: 100%;
+        min-height: 42px;
+    }
+
+    #expenseList > div {
+        grid-template-columns: 1fr;
+
+        gap: 7px;
+    }
+
+    #expenseList p:nth-of-type(1) {
+        grid-column: 1;
+
+        grid-row: auto;
+
+        margin-top: 3px;
+    }
+
+    #expenseList button {
+        grid-row: auto;
+
+        width: fit-content;
+    }
+
+    #sharedUsers {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+
+        transition: none !important;
     }
 }

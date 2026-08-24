@@ -1,0 +1,1170 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* ============================================================
+   EXPENSE SPLITTER
+   SHARP EDITORIAL / RETRO FINANCIAL LEDGER
+   ============================================================ */
+
+:root {
+    /* Paper */
+    --paper: #e9e5da;
+    --paper-light: #f5f2e9;
+    --paper-dark: #d7d2c5;
+
+    /* Ink */
+    --ink: #171814;
+    --ink-soft: #4d4d45;
+    --ink-faint: #77766c;
+
+    /* Structure */
+    --line: #9d9b91;
+    --line-dark: #24251f;
+
+    /* Accent */
+    --red: #9f3f35;
+    --red-dark: #702d27;
+    --red-soft: #ead7d2;
+
+    --green: #52694d;
+    --green-light: #d9e0d4;
+
+    /* Typography */
+    --display: "Libre Baskerville", Georgia, serif;
+    --mono: "DM Mono", monospace;
+
+    /* Motion */
+    --ease: cubic-bezier(.2, .65, .25, 1);
+}
+
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 0 !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    background-color: var(--paper);
+
+    background-image:
+        linear-gradient(
+            rgba(23, 24, 20, .045) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(23, 24, 20, .035) 1px,
+            transparent 1px
+        );
+
+    background-size: 26px 26px;
+
+    color: var(--ink);
+
+    font-family: var(--mono);
+
+    line-height: 1.45;
+
+    padding: 42px 28px;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* ============================================================
+   MAIN ARCHITECTURE
+   ============================================================ */
+
+main {
+    width: min(1220px, 100%);
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(280px, 5fr)
+        minmax(0, 7fr);
+
+    gap: 22px;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+header {
+    grid-column: 1 / -1;
+
+    position: relative;
+
+    min-height: 190px;
+
+    padding: 42px 6px 30px;
+
+    border-top: 4px double var(--ink);
+
+    border-bottom: 4px double var(--ink);
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+    animation: reveal .6s var(--ease) both;
+}
+
+header::before {
+    content: "EXPENSE SPLITTER  /  PERSONAL LEDGER";
+
+    position: absolute;
+
+    top: 11px;
+    left: 6px;
+
+    color: var(--ink-faint);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .13em;
+}
+
+header::after {
+    content: "SYSTEM READY  ●";
+
+    position: absolute;
+
+    top: 11px;
+    right: 6px;
+
+    color: var(--green);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .08em;
+}
+
+header h1 {
+    max-width: 760px;
+
+    color: var(--ink);
+
+    font-family: var(--display);
+
+    font-size: clamp(3rem, 7vw, 6.4rem);
+
+    font-weight: 700;
+
+    letter-spacing: -.065em;
+
+    line-height: .88;
+}
+
+header p {
+    width: 265px;
+
+    margin-bottom: 4px;
+
+    color: var(--ink-soft);
+
+    font-size: 10px;
+
+    line-height: 1.75;
+
+    letter-spacing: .05em;
+
+    text-transform: uppercase;
+}
+
+
+/* ============================================================
+   SECTION FRAME
+   ============================================================ */
+
+main > section {
+    position: relative;
+
+    background: var(--paper-light);
+
+    border: 2px solid var(--ink);
+
+    padding: 25px;
+
+    box-shadow:
+        5px 5px 0 var(--ink);
+
+    transition:
+        transform .16s var(--ease),
+        box-shadow .16s var(--ease),
+        background .16s ease;
+
+    animation: reveal .6s var(--ease) both;
+}
+
+main > section:hover {
+    transform: translate(-2px, -2px);
+
+    box-shadow:
+        7px 7px 0 var(--ink);
+
+    background: #faf7ef;
+}
+
+
+/* ============================================================
+   SECTION NUMBERS
+   ============================================================ */
+
+.peopleSection::after,
+.expenseFormSection::after,
+.expenseSection::after,
+.settlementSection::after {
+    position: absolute;
+
+    top: 25px;
+    right: 25px;
+
+    color: var(--ink-faint);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .08em;
+}
+
+.peopleSection::after {
+    content: "[01]";
+}
+
+.expenseFormSection::after {
+    content: "[02]";
+}
+
+.expenseSection::after {
+    content: "[03]";
+}
+
+.settlementSection::after {
+    content: "[04]";
+}
+
+
+/* ============================================================
+   SECTION HEADINGS
+   ============================================================ */
+
+section h2 {
+    position: relative;
+
+    margin-bottom: 23px;
+
+    padding-bottom: 11px;
+
+    border-bottom: 2px solid var(--ink);
+
+    color: var(--ink);
+
+    font-family: var(--display);
+
+    font-size: 1.35rem;
+
+    font-weight: 700;
+
+    line-height: 1.1;
+}
+
+section h2::before {
+    content: "◆";
+
+    margin-right: 9px;
+
+    color: var(--red);
+
+    font-family: var(--mono);
+
+    font-size: 8px;
+
+    vertical-align: middle;
+}
+
+
+/* ============================================================
+   PEOPLE SECTION
+   ============================================================ */
+
+.peopleSection {
+    grid-column: 1;
+}
+
+#peopleList {
+    margin-top: 21px;
+}
+
+#peopleList ul {
+    list-style: none;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 7px;
+}
+
+#peopleList li {
+    position: relative;
+
+    min-height: 43px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 9px 11px;
+
+    background: var(--paper);
+
+    border: 1px solid var(--ink);
+
+    box-shadow:
+        2px 2px 0 var(--ink);
+
+    color: var(--ink);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    transition:
+        background .15s ease,
+        transform .15s var(--ease);
+}
+
+#peopleList li::before {
+    content: "•";
+
+    margin-right: 8px;
+
+    color: var(--red);
+
+    font-size: 14px;
+}
+
+#peopleList li:hover {
+    background: var(--paper-dark);
+
+    transform: translate(-1px, -1px);
+}
+
+
+/* ============================================================
+   BUTTON SYSTEM
+   ============================================================ */
+
+button {
+    border: 2px solid var(--ink);
+
+    padding: 10px 15px;
+
+    background: var(--ink);
+
+    color: var(--paper-light);
+
+    font-family: var(--mono);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .09em;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    box-shadow:
+        3px 3px 0 var(--red);
+
+    transition:
+        background .12s ease,
+        color .12s ease,
+        transform .12s var(--ease),
+        box-shadow .12s ease;
+}
+
+button:hover {
+    background: var(--red);
+
+    border-color: var(--red);
+
+    box-shadow:
+        4px 4px 0 var(--ink);
+
+    transform: translate(-1px, -1px);
+}
+
+button:active {
+    transform: translate(2px, 2px);
+
+    box-shadow: none;
+}
+
+
+/* ============================================================
+   ADD PEOPLE
+   ============================================================ */
+
+#addPeopleBtn {
+    background: var(--ink);
+
+    color: var(--paper-light);
+}
+
+#addUserForm {
+    margin-top: 19px;
+
+    padding: 16px;
+
+    background: var(--paper);
+
+    border: 2px dashed var(--ink);
+
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+
+    gap: 9px;
+
+    animation: formOpen .3s var(--ease) both;
+}
+
+#addUserForm label {
+    grid-column: 1 / -1;
+}
+
+
+/* ============================================================
+   FORM LABELS
+   ============================================================ */
+
+label,
+.splitUserContainer p {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--ink-soft);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+}
+
+
+/* ============================================================
+   INPUTS
+   ============================================================ */
+
+input,
+select {
+    width: 100%;
+
+    height: 42px;
+
+    padding: 0 11px;
+
+    background: #fffdf8;
+
+    border: 2px solid var(--ink);
+
+    outline: none;
+
+    color: var(--ink);
+
+    font-family: var(--mono);
+
+    font-size: 11px;
+
+    transition:
+        background .15s ease,
+        border-color .15s ease,
+        box-shadow .15s ease;
+}
+
+input::placeholder {
+    color: #89877e;
+}
+
+input:hover,
+select:hover {
+    background: #ffffff;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--red);
+
+    box-shadow:
+        inset 4px 0 0 var(--red);
+}
+
+
+/* ============================================================
+   EXPENSE FORM
+   ============================================================ */
+
+.expenseFormSection {
+    grid-column: 2;
+}
+
+#addExpenseBtn {
+    position: absolute;
+
+    top: 19px;
+    right: 56px;
+
+    background: var(--red);
+
+    border-color: var(--red);
+
+    color: white;
+}
+
+#addExpenseBtn:hover {
+    background: var(--ink);
+
+    border-color: var(--ink);
+}
+
+#addExpenseForm {
+    margin-top: 22px;
+
+    padding-top: 21px;
+
+    border-top: 2px dashed var(--ink);
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    gap: 19px 22px;
+}
+
+#addExpenseForm > div {
+    min-width: 0;
+}
+
+.paidUserContainer,
+.splitUserContainer,
+#addUserExpenseBtn {
+    grid-column: 1 / -1;
+}
+
+form[hidden] {
+    display: none !important;
+}
+
+
+/* ============================================================
+   SHARED PEOPLE
+   ============================================================ */
+
+#sharedUsers {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(125px, 1fr));
+
+    gap: 7px;
+}
+
+#sharedUsers > div {
+    position: relative;
+
+    min-height: 41px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 10px;
+
+    background: var(--paper);
+
+    border: 2px solid var(--ink);
+
+    cursor: pointer;
+
+    transition:
+        background .12s ease,
+        transform .12s ease;
+}
+
+#sharedUsers > div:hover {
+    background: var(--paper-dark);
+
+    transform: translate(-1px, -1px);
+}
+
+#sharedUsers input {
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+#sharedUsers > div::before {
+    content: "";
+
+    width: 15px;
+    height: 15px;
+
+    flex-shrink: 0;
+
+    background: transparent;
+
+    border: 2px solid var(--ink);
+}
+
+#sharedUsers > div:has(input:checked) {
+    background: var(--green-light);
+
+    border-color: var(--green);
+}
+
+#sharedUsers > div:has(input:checked)::before {
+    background: var(--green);
+
+    border-color: var(--green);
+
+    box-shadow:
+        inset 0 0 0 3px var(--green-light);
+}
+
+#sharedUsers label {
+    margin: 0;
+
+    color: var(--ink);
+
+    font-size: 10px;
+
+    letter-spacing: 0;
+
+    text-transform: none;
+
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   ADD EXPENSE ACTION
+   ============================================================ */
+
+#addUserExpenseBtn {
+    justify-self: start;
+
+    margin-top: 1px;
+
+    background: var(--ink);
+
+    color: var(--paper-light);
+}
+
+
+/* ============================================================
+   EXPENSE LEDGER
+   ============================================================ */
+
+.expenseSection {
+    grid-column: 1 / -1;
+
+    padding: 25px 0 0 !important;
+
+    overflow: hidden;
+}
+
+.expenseSection h2 {
+    margin-left: 25px;
+
+    margin-right: 25px;
+}
+
+
+/* Ledger heading */
+
+#expenseList {
+    display: flex;
+
+    flex-direction: column;
+}
+
+#expenseList::before {
+    content:
+        "DESCRIPTION"
+        "                              "
+        "AMOUNT"
+        "                 "
+        "PAID BY";
+
+    display: block;
+
+    padding: 9px 25px;
+
+    background: var(--ink);
+
+    color: var(--paper);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: .06em;
+
+    white-space: pre;
+}
+
+
+/* ============================================================
+   EXPENSE ROWS
+   ============================================================ */
+
+#expenseList > div {
+    min-height: 72px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(160px, 1.35fr)
+        minmax(100px, .65fr)
+        minmax(170px, 1fr)
+        auto;
+
+    align-items: center;
+
+    gap: 17px;
+
+    padding: 11px 25px;
+
+    background: var(--paper-light);
+
+    border-bottom: 1px solid var(--line);
+
+    transition:
+        background .14s ease,
+        padding-left .14s var(--ease);
+}
+
+#expenseList > div:hover {
+    background: #ffffff;
+
+    padding-left: 31px;
+}
+
+#expenseList h2 {
+    margin: 0;
+
+    padding: 0;
+
+    border: 0;
+
+    font-family: var(--display);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+#expenseList h2::before {
+    display: none;
+}
+
+#expenseList p {
+    margin: 0;
+
+    color: var(--ink-soft);
+
+    font-size: 9px;
+}
+
+#expenseList p:first-of-type {
+    color: var(--green);
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   EXPENSE ACTIONS
+   ============================================================ */
+
+#expenseList button {
+    padding: 6px 9px;
+
+    background: transparent;
+
+    color: var(--ink);
+
+    border: 1px solid var(--ink);
+
+    box-shadow: 2px 2px 0 var(--ink);
+
+    font-size: 8px;
+}
+
+#expenseList button:hover {
+    background: var(--ink);
+
+    color: var(--paper);
+
+    border-color: var(--ink);
+
+    box-shadow: 3px 3px 0 var(--red);
+
+    transform: translate(-1px, -1px);
+}
+
+#expenseList button:last-child {
+    margin-left: 4px;
+
+    color: var(--red);
+
+    border-color: var(--red);
+
+    box-shadow: 2px 2px 0 var(--red-dark);
+}
+
+#expenseList button:last-child:hover {
+    background: var(--red);
+
+    color: white;
+
+    box-shadow: 3px 3px 0 var(--ink);
+}
+
+
+/* ============================================================
+   SETTLEMENT
+   ============================================================ */
+
+.settlementSection {
+    grid-column: 1 / -1;
+
+    min-height: 250px;
+}
+
+#settlementBtn {
+    background: var(--ink);
+
+    color: var(--paper-light);
+}
+
+
+/* ============================================================
+   SETTLEMENT OUTPUT
+   ============================================================ */
+
+#settlementList {
+    margin-top: 22px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(260px, .8fr)
+        minmax(0, 1.2fr);
+
+    gap: 8px 25px;
+}
+
+#settlementList h3 {
+    grid-column: 1;
+
+    padding: 17px;
+
+    background: var(--green-light);
+
+    border: 2px solid var(--green);
+
+    color: var(--green);
+
+    font-family: var(--mono);
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+#settlementList > p {
+    grid-column: 1;
+
+    padding: 8px 1px;
+
+    color: var(--ink-soft);
+
+    font-size: 9px;
+}
+
+#settlementList > div {
+    grid-column: 2;
+
+    min-height: 49px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 10px 14px;
+
+    background: var(--paper);
+
+    border: 2px solid var(--ink);
+
+    border-left: 6px solid var(--red);
+
+    box-shadow: 3px 3px 0 var(--ink);
+
+    animation: settlementIn .25s var(--ease) both;
+}
+
+#settlementList > div p {
+    margin: 0;
+
+    color: var(--ink);
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+#settlementList > div p::before {
+    content: "→ ";
+
+    color: var(--red);
+}
+
+
+/* ============================================================
+   FOCUS
+   ============================================================ */
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+label:focus-visible {
+    outline: 2px solid var(--red);
+
+    outline-offset: 3px;
+}
+
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes formOpen {
+    from {
+        opacity: 0;
+        transform: translateY(-7px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes settlementIn {
+    from {
+        opacity: 0;
+        transform: translateX(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    body {
+        padding: 30px 18px;
+    }
+
+    main {
+        display: block;
+    }
+
+    header {
+        min-height: 160px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+    header p {
+        width: auto;
+
+        max-width: 400px;
+    }
+
+    main > section {
+        margin-top: 16px;
+    }
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 18px 10px;
+    }
+
+    header {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    header h1 {
+        font-size: 2.8rem;
+    }
+
+    header::after {
+        display: none;
+    }
+
+    main > section {
+        padding: 19px;
+    }
+
+    #addExpenseForm {
+        grid-template-columns: 1fr;
+    }
+
+    .paidUserContainer,
+    .splitUserContainer,
+    #addUserExpenseBtn {
+        grid-column: auto;
+    }
+
+    #addUserForm {
+        grid-template-columns: 1fr;
+    }
+
+    #addUser {
+        min-height: 40px;
+    }
+
+    #peopleList ul {
+        grid-template-columns: 1fr;
+    }
+
+    .expenseSection {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .expenseSection h2 {
+        margin-left: 19px;
+        margin-right: 19px;
+    }
+
+    #expenseList::before {
+        display: none;
+    }
+
+    #expenseList > div {
+        grid-template-columns: 1fr;
+
+        gap: 6px;
+
+        padding: 16px 19px;
+    }
+
+    #expenseList > div:hover {
+        padding-left: 24px;
+    }
+
+    #expenseList button {
+        width: fit-content;
+    }
+
+    #settlementList {
+        display: block;
+    }
+
+    #settlementList h3,
+    #settlementList > p,
+    #settlementList > div {
+        margin-bottom: 8px;
+    }
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before {
+        animation: none !important;
+        transition: none !important;
+    }
+}

@@ -24,7 +24,13 @@ const realAnotherArr = anotherArr.flat(Infinity);  // sab array ko ek array bana
 // console.log(realAnotherArr);
 
 
-console.log(Array.isArray("munin"));  // check array hai kay
+console.log(Array.isArray("munin"));  // check array hai kya
 console.log(Array.from("munin"));  // array mai convert karedya
 console.log(Array.from({name:"munin"}));  // gives an empty array, we have to say keys ka array banau ya values, interesting case
 
+
+let score1 = 100;
+let score2 = 200;
+let score3 = 300;
+
+console.log(Array.of(score1, score2, score3));
