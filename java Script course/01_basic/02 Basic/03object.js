@@ -17,14 +17,19 @@ const jsUser = {
   lastLoginDays: ["Monday", "saturday"],
 };
 
-console.log(jsUser.email); // one way using .
+// console.log(jsUser.email); // one way using .
 
-console.log(jsUser["email"]); // one another way
+// console.log(jsUser["email"]); // one another way
 
-console.log(jsUser[mySym]);  // proper way to use and define symbol in js
+// console.log(jsUser[mySym]);  // proper way to use and define symbol in js
+
+// console.log(jsUser);
 
 
-Object.freeze(jsUser);  // freeze kar dena
-jsUser.email = "muninNew@gamil.com";
+jsUser.greeting = function(){
+  console.log("hello js user");
+  
+}
 
-console.log(jsUser);
+
+
