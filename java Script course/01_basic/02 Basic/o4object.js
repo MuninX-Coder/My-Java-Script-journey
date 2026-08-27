@@ -57,3 +57,39 @@ console.log(tinderUser);
 console.log(Object.keys(tinderUser));
 console.log(Object.values(tinderUser));
 console.log(Object.entries(tinderUser));
+
+console.log(tinderUser.hasOwnProperty("isLoggedIn"));
+
+// object destructring
+
+const course = {
+    courseName: "js in hindi",
+    price: "999",
+    courseTeacher: "Hitesh",
+}
+
+// course.courseTeacher 
+
+const {courseTeacher: instructor} = course   // now we have to not write course.courseTeacher,  we can direclty use courseInstructor  or instructor also
+
+console.log(courseTeacher);
+
+
+const navBar = ({company}) =>{
+
+}
+
+navBar(comapny = "munin")
+
+
+// {
+//     'name': "Munin";
+//     'courseName': "js in hindi";
+//     'price': "free";
+// }
+
+// [
+//     {},
+//     {},
+//     {},
+// ]
