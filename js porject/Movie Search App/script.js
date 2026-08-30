@@ -15,79 +15,49 @@ searchMovieBtn.addEventListener("click", function () {
 
   async function getMovie() {
     const response = await fetch(
-      `http://www.omdbapi.com/?t=${searchMovieInputValue}&apikey=fd443a49`,
+      `http://www.omdbapi.com/?s=${searchMovieInputValue}&apikey=fd443a49`,
     );
 
     const data = await response.json();
 
+  
+
     if (data.Response === "True") {
-      let movieTitle = data.Title;
+      data.Search.forEach((movie) => {
+        let movieTitle = movie.Title;
+        let movieYear = movie.Year;
+        let moviePoster = movie.Poster;
+        let movieType = movie.Type;
 
-      let movieYear = data.Year;
+        let subDiv = document.createElement("div");
 
-      let moviePoster = data.Poster;
+        let h1ForMovieTitle = document.createElement("h1");
+        h1ForMovieTitle.textContent = movieTitle;
 
-      let movieRating = data.imdbRating;
+        let pForMovieYear = document.createElement("p");
+        pForMovieYear.textContent = movieYear;
 
-      let moviePlot = data.Plot;
+        let imgForMoviePoster = document.createElement("img");
+        imgForMoviePoster.src = moviePoster;
 
-      let movieDirector = data.Director;
+        let h3ForMovieType = document.createElement("h3");
+        h3ForMovieType.textContent = movieType;
 
-      let movieTitleHeading = document.createElement("h2");
+        subDiv.appendChild(imgForMoviePoster);
+        subDiv.appendChild(h1ForMovieTitle);
+        subDiv.appendChild(pForMovieYear);
+        subDiv.appendChild(h3ForMovieType);
 
-      movieTitleHeading.textContent = movieTitle;
-
-      let movieYearPara = document.createElement("p");
-
-      movieYearPara.textContent = movieYear;
-
-      let moviePosterImage = document.createElement("img");
-
-      moviePosterImage.src = moviePoster;
-
-      let movieRatingPara = document.createElement("p");
-
-      movieRatingPara.textContent = `Rating : ${movieRating}`;
-
-      let moviePlotPara = document.createElement("p");
-
-      moviePlotPara.textContent = moviePlot;
-
-      let movieDirectorHeading = document.createElement("h3");
-
-      movieDirectorHeading.textContent = movieDirector;
-
-      let mainMovieDiv = document.createElement("div");
-
-      let movieInfoDiv = document.createElement("div");
-
-      movieInfoDiv.appendChild(movieTitleHeading);
-
-      movieInfoDiv.appendChild(movieYearPara);
-
-      movieInfoDiv.appendChild(movieRatingPara);
-
-      movieInfoDiv.appendChild(moviePlotPara);
-
-      movieInfoDiv.appendChild(movieDirectorHeading);
-
-      mainMovieDiv.appendChild(moviePosterImage);
-
-      mainMovieDiv.appendChild(movieInfoDiv);
-
-      displyMovieMainContainer.appendChild(mainMovieDiv);
-
-      searchMovieInput.value = "";
+        displyMovieMainContainer.appendChild(subDiv);
+      });
     } else {
-      let div = document.createElement("div");
+      let subDiv = document.createElement("div");
 
       let p = document.createElement("p");
+      p.textContent = "Movie not Available";
 
-      p.textContent = "Movie not found / invalid movie name";
-
-      div.appendChild(p);
-
-      displyMovieMainContainer.appendChild(div);
+      subDiv.appendChild(p);
+      displyMovieMainContainer.appendChild(subDiv);
     }
   }
 
