@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Notes Buddy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <header>
+            <h1>AuraNote</h1>
+            <div class="divForDesc">
+                <p>Welcome to your new digital sanctuary. Designed for the mindful thinker, this app strips away the
+                    digital noise to give your thoughts a beautiful, clutter-free home. Whether you are capturing a
+                    fleeting spark of inspiration, mapping out a grand project, or simply reflecting on your day, our
+                    interface moves out of your way so your mind can flow freely. It is more than just a notes app—it is
+                    a serene, intentional space where your ideas can breathe, grow, and beautifully align.</p>
+            </div>
+        </header>
+        <section>
+            <div class="upperPart">
+                <div>
+                    <input type="text" name="searchNotes" id="searchNotesInp" placeholder="Search your Notes">
+                </div>
+                <div>
+                    <button id="addBtn">add</button>
+                </div>
+            </div>
+            <div id="containerNotes">
+
+            </div>
+            <div>
+                <form id="myForm" hidden>
+
+                    <div>
+                        <input type="text" id="notesHeadingInp" placeholder="note Heading">
+                    </div>
+                    <div>
+                        <textarea name="notesDetailes" id="notesDetailesInp" placeholder="note content"></textarea>
+                    </div>
+                    <div>
+                        <button type="button" id="cancelBtn">cancel</button>
+                        <button type="button" id="createBtn">create</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
